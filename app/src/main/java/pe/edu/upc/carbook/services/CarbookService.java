@@ -5,5 +5,5 @@ package pe.edu.upc.carbook.services;
  */
 
 public class CarbookService {
-    public static String SOURCES_URL = "http://192.168.1.39:99/users/signin";
+    public static String SIGNIN_URL = "http://200.0.118.129/CarbookWS/users/signin";
 }
