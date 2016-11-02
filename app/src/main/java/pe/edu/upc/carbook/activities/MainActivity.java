@@ -1,6 +1,7 @@
 package pe.edu.upc.carbook.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         Login();
                 }
                 else{
-                    Login_in_BD();
+                    //Login_in_BD();
                     //user.save();
                 }
             }
@@ -110,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void Login(){
         AndroidNetworking.post(CarbookService.SOURCES_URL)
-                .addBodyParameter("Correo",user.getEmail())
-                .addBodyParameter("Contrasena",user.getPassword())
+                .addBodyParameter("Correo",emailTextInputEditText.getText().toString())
+                .addBodyParameter("Contrasena",passwordTextInputEditText.getText().toString())
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -140,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
 
                                    Toast toast = Toast.makeText(context, result, duration);
                                    toast.show();
+
+                                   Intent intent = new Intent(MainActivity.this,TabsActivity.class);
+                                   startActivity(intent);
                                }
                                //response.getJSONObject("Result");
                            }catch(JSONException e){
