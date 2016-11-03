@@ -1,6 +1,7 @@
 package pe.edu.upc.carbook.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.Nullable;
@@ -50,16 +51,13 @@ public class MainActivity extends AppCompatActivity {
                 boolean connection;
                 connection = haveNetworkConnection();
                 emailTextInputEditText = (TextInputEditText) findViewById(R.id.emailTextInputEditText);
-                passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);;
+                passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
 
                 if(connection){
 
                         Login();
                 }
                 else{
-
-                    Toast toast = Toast.makeText(getApplicationContext(),"Debe conectarse a internet para ingresar", Toast.LENGTH_SHORT);
-                    toast.show();
                     //Login_in_BD();
                     //user.save();
                 }
@@ -112,11 +110,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Login(){
-        //user.setEmail(emailTextInputEditText.getText().toString());
-        //user.setPassword((passwordTextInputEditText.getText().toString()));
-        AndroidNetworking.post(CarbookService.SIGNIN_URL)
-                .addBodyParameter("Correo",user.getEmail())
-                .addBodyParameter("Contrasena",user.getPassword())
+        AndroidNetworking.post(CarbookService.SOURCES_URL)
+                .addBodyParameter("Correo",emailTextInputEditText.getText().toString())
+                .addBodyParameter("Contrasena",passwordTextInputEditText.getText().toString())
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -145,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
 
                                    Toast toast = Toast.makeText(context, result, duration);
                                    toast.show();
+
+                                   Intent intent = new Intent(MainActivity.this,TabsActivity.class);
+                                   startActivity(intent);
                                }
                                //response.getJSONObject("Result");
                            }catch(JSONException e){
