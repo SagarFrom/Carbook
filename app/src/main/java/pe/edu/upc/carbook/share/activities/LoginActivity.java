@@ -1,11 +1,9 @@
-package pe.edu.upc.carbook.activities;
+package pe.edu.upc.carbook.share.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
@@ -21,8 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pe.edu.upc.carbook.R;
-import pe.edu.upc.carbook.models.User;
-import pe.edu.upc.carbook.services.CarbookService;
+import pe.edu.upc.carbook.client.activities.ClientTabActivity;
+import pe.edu.upc.carbook.share.models.User;
+import pe.edu.upc.carbook.share.services.*;
 
 public class LoginActivity extends BaseActivity {
 
@@ -110,7 +109,7 @@ public class LoginActivity extends BaseActivity {
 
     private void Login(){
 
-        AndroidNetworking.post(CarbookService.SOURCES_URL)
+        AndroidNetworking.post(LoginService.LOGIN_SOURCES)
                 .addBodyParameter("Correo",emailTextInputEditText.getText().toString())
                 .addBodyParameter("Contrasena",passwordTextInputEditText.getText().toString())
                 .setTag("test")

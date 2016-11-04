@@ -1,4 +1,4 @@
-package pe.edu.upc.carbook.activities;
+package pe.edu.upc.carbook.client.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -6,16 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
-import pe.edu.upc.carbook.fragments.OneFragment;
-//import pe.edu.upc.carbook.fragments.ThirdFragment;
-import pe.edu.upc.carbook.fragments.SecondFragment;
+import pe.edu.upc.carbook.share.activities.BaseActivity;
+import pe.edu.upc.carbook.client.fragments.DataFragment;
+import pe.edu.upc.carbook.client.fragments.CarFragment;
 
 public class ClientTabActivity extends BaseActivity {
 
@@ -26,7 +25,7 @@ public class ClientTabActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tabs);
+        setContentView(R.layout.activity_client_tab);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -42,8 +41,8 @@ public class ClientTabActivity extends BaseActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "ONE");
-        adapter.addFragment(new SecondFragment(), "TWO");
+        adapter.addFragment(new DataFragment(), "ONE");
+        adapter.addFragment(new CarFragment(), "TWO");
         //adapter.addFragment(new ThirdFragment(), "THREE");
         viewPager.setAdapter(adapter);
     }

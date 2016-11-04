@@ -1,4 +1,4 @@
-package pe.edu.upc.carbook.activities;
+package pe.edu.upc.carbook.share.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
