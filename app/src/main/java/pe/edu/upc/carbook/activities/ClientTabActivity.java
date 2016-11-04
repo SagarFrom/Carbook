@@ -17,7 +17,7 @@ import pe.edu.upc.carbook.fragments.OneFragment;
 //import pe.edu.upc.carbook.fragments.ThirdFragment;
 import pe.edu.upc.carbook.fragments.SecondFragment;
 
-public class TabsActivity extends AppCompatActivity {
+public class ClientTabActivity extends BaseActivity {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
