@@ -1,4 +1,4 @@
-package pe.edu.upc.carbook.models;
+package pe.edu.upc.carbook.share.models;
 
 import com.orm.SugarRecord;
 
