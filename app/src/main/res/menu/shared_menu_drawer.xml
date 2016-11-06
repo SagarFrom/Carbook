@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_item_profile"
+            android:checked="true"
+            android:icon="@mipmap/ic_user"
+            android:title="@string/nav_profile"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_item_adverts"
+            android:icon="@mipmap/ic_advert"
+            android:title="@string/nav_adverts"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_item_av_adverts"
+            android:icon="@mipmap/ic_advert"
+            android:title="@string/nav_available_adverts"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_item_postulations"
+            android:icon="@mipmap/ic_postulation"
+            android:title="@string/nav_postulations"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_item_services"
+            android:icon="@mipmap/ic_service"
+            android:title="@string/nav_services"
+            android:visible="true"/>
+    </group>
+
+</menu>

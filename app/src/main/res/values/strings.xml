@@ -3,8 +3,37 @@
     <string name="add_user_name">User</string>
     <string name="add_user_password">Password</string>
 
+    <string name="title_services">Servicios</string>
+
+    <!--Shared-->
+    <string name="nav_profile">Perfil</string>
+    <string name="nav_services">Servicios</string>
+
+    <!--Cliente-->
+    <string name="nav_adverts">Mis Anuncios</string>
+    <string name="tab_title_personal_info">Datos Personales</string>
+    <string name="tab_title_locals">Locales</string>
+    <string name="tab_title_services">Servicios</string>
+
+    <!--Proveedor-->
+    <string name="nav_available_adverts">Anuncios Disponibles</string>
+    <string name="nav_postulations">Postulaciones</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="providerNav">
+        <item>Perfil</item>
+        <item>Anuncios Disponibles</item>
+        <item>Postulaciones</item>
+        <item>Mis Servicios</item>
+    </string-array>
+    <string-array name="clientNav">
+        <item>Perfil</item>
+        <item>Mis Anuncios</item>
+        <item>Mis Servicios</item>
+    </string-array>
 </resources>
 
 

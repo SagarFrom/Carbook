@@ -25,14 +25,15 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="pe.edu.upc.carbook" />
 
-        <activity android:name=".share.activities.LoginActivity">
+        <activity android:name=".share.activities.NavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".client.activities.ClientTabActivity"></activity>
+        <activity android:name=".client.activities.ClientTabActivity" />
+        <activity android:name=".share.activities.LoginActivity"></activity>
     </application>
 
 </manifest>
