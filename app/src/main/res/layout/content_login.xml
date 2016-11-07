@@ -27,7 +27,7 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="317dp"
+                android:layout_height="280dp"
                 android:layout_gravity="center"
                 android:src="@drawable/logo"
 
@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:hint="@string/add_user_name"
+                    android:hint="@string/add_email"
                     android:id="@+id/emailTextInputEditText"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -58,13 +58,20 @@
 
             <android.support.v7.widget.AppCompatButton
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:theme="@style/loginButton"
                 android:id="@+id/signinButton"
                 android:text="SIGN IN"
 
                 />
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:theme="@style/loginButton"
+                android:id="@+id/siginUp"
+                android:text="REGISTER"
 
+                />
 
 
         </LinearLayout>

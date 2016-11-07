@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pe.edu.upc.carbook.R;
+import pe.edu.upc.carbook.RegisterActivity;
 import pe.edu.upc.carbook.client.activities.ClientTabActivity;
 import pe.edu.upc.carbook.share.models.User;
 import pe.edu.upc.carbook.share.services.*;
@@ -42,6 +43,7 @@ public class LoginActivity extends BaseActivity {
 
         AppCompatButton signinButton = (AppCompatButton) findViewById(R.id.signinButton);
         signinButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
 
@@ -52,8 +54,8 @@ public class LoginActivity extends BaseActivity {
                 passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
 
                 if(connection){
-
-                        Login();
+                    ChangeScreem(RegisterActivity.class,true);
+                        //Login();
                 }
                 else{
                     //Login_in_BD();
@@ -62,6 +64,14 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
+        AppCompatButton signupButton = (AppCompatButton) findViewById(R.id.siginUp);
+        signupButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view){
+                ChangeScreem(RegisterActivity.class,true);
+            }
+        });
     }
 
     private boolean haveNetworkConnection() {
@@ -141,7 +151,8 @@ public class LoginActivity extends BaseActivity {
                                    Toast toast = Toast.makeText(context, result, duration);
                                    toast.show();
 
-                                   ChangeScreem(ClientTabActivity.class,true);
+                                   //ChangeScreem(ClientTabActivity.class,true);
+                                   ChangeScreem(RegisterActivity.class,true);
                                }
                                //response.getJSONObject("Result");
                            }catch(JSONException e){

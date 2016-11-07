@@ -7,4 +7,5 @@ package pe.edu.upc.carbook.share.services;
 public class LoginService {
 
     public static String LOGIN_SOURCES = "http://200.0.118.129/CarbookWS/users/signin";
+    public static String REGISTER_SOURCES = "http://200.0.118.129/CarbookWS/users/";
 }
