@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import pe.edu.upc.carbook.R;
+import pe.edu.upc.carbook.client.fragments.AdvertsFragment;
 import pe.edu.upc.carbook.provider.fragments.ProfileFragment;
 import pe.edu.upc.carbook.provider.fragments.ServiceFragment;
 
@@ -77,6 +78,7 @@ public class NavigationActivity extends BaseActivity {
                 break;
             case R.id.nav_item_adverts:
                 // Fragmento para la sección Cuenta
+                genericFragment = new AdvertsFragment();
                 break;
             case R.id.nav_item_av_adverts:
                 // Fragmento para la sección Categorías

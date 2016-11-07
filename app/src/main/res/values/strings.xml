@@ -23,6 +23,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="title_activity_adverts">Anuncios</string>
+    <string name="sample_description">Descripcion de Ejemplo</string>
+    <string name="sample_cantidad_postulantes">Cantidad de Postulantes: </string>
+
+
     <string-array name="providerNav">
         <item>Perfil</item>
         <item>Anuncios Disponibles</item>
