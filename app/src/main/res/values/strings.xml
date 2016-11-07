@@ -5,6 +5,20 @@
 
     <string name="title_services">Servicios</string>
 
+    <!-- TODO: For register-->
+    <string name="add_mother_lastname">Mother LastName</string>
+    <string name="add_father_lastname">Father LastName</string>
+    <string name="add_name">Name</string>
+    <string name="add_dni">DNI</string>
+    <string name="add_birthdate">BirthData</string>
+    <string name="add_company_name">Company Name</string>
+    <string name="add_rol">Rol</string>
+    <string name="add_correo">Correo</string>
+    <string name="add_password">Password</string>
+    <string name="verify_password">Password</string>
+    <string name="add_ruc">Ruc</string>
+    <!-- -->
+
     <!--Shared-->
     <string name="nav_profile">Perfil</string>
     <string name="nav_services">Servicios</string>
