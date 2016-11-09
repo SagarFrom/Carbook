@@ -26,16 +26,16 @@
             android:value="pe.edu.upc.carbook" />
 
 
+        <!--
         <activity android:name=".share.activities.NavigationActivity">
-            <!--<activity android:name=".client.activities.AdvertsActivity">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
 
-        <!--
         <activity android:name=".share.activities.LoginActivity">
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,7 @@
             </activity>
 
         <activity android:name="pe.edu.upc.carbook.RegisterActivity"/>
-        -->
+
     </application>
 
 </manifest>

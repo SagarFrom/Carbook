@@ -54,7 +54,7 @@ public class LoginActivity extends BaseActivity {
                 passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
 
                 if(connection){
-                    ChangeScreem(RegisterActivity.class,true);
+                    //ChangeScreem(RegisterActivity.class,true);
                         //Login();
                 }
                 else{

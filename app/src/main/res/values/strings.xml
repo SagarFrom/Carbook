@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Carbook</string>
 
-    <string name="add_user_password">Password</string>
+    <string name="add_user">User</string>
 
     <string name="title_services">Servicios</string>
 
@@ -10,7 +10,7 @@
     <string name="add_father_lastname">Father LastName</string>
     <string name="add_name">Name</string>
     <string name="add_dni">DNI</string>
-    <string name="add_birthdate">BirthData</string>
+    <string name="add_birthdate">BirthData (DD//MM/YYY)</string>
     <string name="add_company_name">Company Name</string>
     <string name="add_rol">Rol</string>
     <string name="add_email">Email</string>
