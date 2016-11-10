@@ -1,5 +1,7 @@
 package pe.edu.upc.carbook.share.models;
 
+import android.os.Bundle;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +20,7 @@ public class Advert {
     public String AdvertId;
     public String ProviderId;
     public String ClientId;
+    public String CarId;
     public String Description;
     public String Quotation;
     public String CreationDate;
@@ -146,12 +149,20 @@ public class Advert {
     public void setCantApplications(String cantApplications) {
         CantApplications = cantApplications;
     }
+    public String getCarId() {
+        return CarId;
+    }
+
+    public void setCarId(String carId) {
+        CarId = carId;
+    }
 
     public static Advert buildFromJSONObject(JSONObject jsonAdvert){
         Advert advert = new Advert();
         try{
             advert.setAdvertId(jsonAdvert.getString("AdvertId"));
             advert.setClientId(jsonAdvert.getString("ClientId"));
+            advert.setCarId(jsonAdvert.getString("CarId"));
             advert.setProviderId(jsonAdvert.getString("ProviderId"));
             advert.setDescription(jsonAdvert.getString("Description"));
             advert.setQuotation(jsonAdvert.getString("Quotation"));
@@ -161,7 +172,7 @@ public class Advert {
             advert.setRanking(jsonAdvert.getString("Ranking"));
             advert.setStatus(jsonAdvert.getString("Status"));
             advert.setFirstPhotoUrl(jsonAdvert.getString("FirstPhotoUrl"));
-            advert.setCantApplications("1");
+            advert.setCantApplications(jsonAdvert.getString("NPostulations"));
             return advert;
         }catch (JSONException e){
             e.printStackTrace();
@@ -182,4 +193,39 @@ public class Advert {
         return adverts;
     }
 
+    public static Advert buildFromBundle(Bundle bundle){
+        Advert advert = new Advert();
+        advert.setAdvertId(bundle.getString("advertId"));
+        advert.setClientId(bundle.getString("clientId"));
+        advert.setCarId(bundle.getString("carId"));
+        advert.setProviderId(bundle.getString("providerId"));
+        advert.setDescription(bundle.getString("description"));
+        advert.setQuotation(bundle.getString("quotation"));
+        advert.setCreationDate(bundle.getString("creationDate"));
+        advert.setEndDate(bundle.getString("endDate"));
+        advert.setComments(bundle.getString("comments"));
+        advert.setRanking(bundle.getString("ranking"));
+        advert.setStatus(bundle.getString("status"));
+        advert.setFirstPhotoUrl(bundle.getString("firstPhotoUrl"));
+        advert.setCantApplications(bundle.getString("cantApplications"));
+        return advert;
+    }
+
+    public Bundle toBundle(){
+        Bundle bundle = new Bundle();
+        bundle.putString("advertId",this.getAdvertId());
+        bundle.putString("clientId",this.getClientId());
+        bundle.putString("carId",this.getCarId());
+        bundle.putString("providerId",this.getProviderId());
+        bundle.putString("description",this.getDescription());
+        bundle.putString("quotation",this.getQuotation());
+        bundle.putString("creationDate",this.getCreationDate());
+        bundle.putString("endDate",this.getEndDate());
+        bundle.putString("comments",this.getComments());
+        bundle.putString("ranking",this.getRanking());
+        bundle.putString("status",this.getStatus());
+        bundle.putString("firstPhotoUrl",this.getFirstPhotoUrl());
+        bundle.putString("cantApplications",this.getCantApplications());
+        return bundle;
+    }
 }

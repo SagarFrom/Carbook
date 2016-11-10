@@ -1,8 +1,12 @@
 package pe.edu.upc.carbook.client.adapters;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
+import pe.edu.upc.carbook.client.fragments.AdvertDetailFragment;
 import pe.edu.upc.carbook.share.models.Advert;
 
 /**
@@ -22,9 +27,13 @@ import pe.edu.upc.carbook.share.models.Advert;
 
 public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder>{
     private List<Advert> adverts;
-
+    private Activity activity;
     public void setAdverts(List<Advert> adverts){ this.adverts = adverts; }
-
+    public void setActivity(Activity a) {
+        this.activity = a;
+        if(a == null)
+            Log.d("Carbook","");
+    }
     @Override
     public AdvertAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater
@@ -35,7 +44,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(AdvertAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(AdvertAdapter.ViewHolder holder, final int position) {
         holder.fechaCreacionTextView.setText(adverts.get(position).getCreationDate());
         holder.descripcionTextView.setText(adverts.get(position).getDescription());
         holder.cantidadPostulantesTextView.setText(adverts.get(position).getCantApplications());
@@ -46,7 +55,17 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder
         holder.advertClientCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent itemItent  = new Intent(v.getContext(),)
+                Fragment fragment2 = new AdvertDetailFragment();
+                Bundle bundle = adverts.get(position).toBundle();
+                fragment2.setArguments(bundle);
+                FragmentManager fragmentManager = activity.getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.main_container,fragment2)
+                        .commit();
+                /*Intent itemItent  = new Intent(v.getContext(), AdvertDetailFragment.class);
+                Bundle bundle = adverts.get(position).toBundle();
+                itemItent.putExtras(bundle);
+                v.getContext().startActivity(itemItent);*/
             }
         });
     }
