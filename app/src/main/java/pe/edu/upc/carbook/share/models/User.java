@@ -10,22 +10,32 @@ import java.util.List;
 
 public class User extends SugarRecord {
 
+    private Integer UserId;
     private String email;
     private String password;
     private String Name;
     private String LastName;
-    private String Rol;
+    private String Role;
 
     public User(){
 
     }
 
-    public User(String email, String password, String name, String lastName, String rol) {
+    public User(Integer userId, String email, String password, String name, String lastName, String role) {
+        this.UserId = userId;
         this.email = email;
         this.password = password;
         Name = name;
         LastName = lastName;
-        Rol = rol;
+        Role = role;
+    }
+
+    public Integer getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(Integer userId) {
+        UserId = userId;
     }
 
     public String getEmail() {
@@ -60,12 +70,12 @@ public class User extends SugarRecord {
         LastName = lastName;
     }
 
-    public String getRol() {
-        return Rol;
+    public String getRole() {
+        return Role;
     }
 
-    public void setRol(String rol) {
-        Rol = rol;
+    public void setRole(String role) {
+        Role = role;
     }
 
     public static User findByUserName(String username){

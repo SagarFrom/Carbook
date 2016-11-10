@@ -61,7 +61,7 @@
                 android:layout_height="50dp"
                 android:theme="@style/loginButton"
                 android:id="@+id/signinButton"
-                android:text="SIGN IN"
+                android:text="Iniciar Sesion"
 
                 />
             <android.support.v7.widget.AppCompatButton
@@ -69,7 +69,7 @@
                 android:layout_height="55dp"
                 android:theme="@style/loginButton"
                 android:id="@+id/siginUp"
-                android:text="REGISTER"
+                android:text="Registrarse"
 
                 />
 

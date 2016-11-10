@@ -1,6 +1,7 @@
 package pe.edu.upc.carbook.share.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.TextInputEditText;
@@ -19,8 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pe.edu.upc.carbook.R;
-import pe.edu.upc.carbook.RegisterActivity;
-import pe.edu.upc.carbook.client.activities.ClientTabActivity;
+//import pe.edu.upc.carbook.RegisterActivity;
 import pe.edu.upc.carbook.share.models.User;
 import pe.edu.upc.carbook.share.services.*;
 
@@ -55,7 +55,7 @@ public class LoginActivity extends BaseActivity {
 
                 if(connection){
                     //ChangeScreem(RegisterActivity.class,true);
-                        //Login();
+                    Login();
                 }
                 else{
                     //Login_in_BD();
@@ -69,7 +69,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onClick(View view){
-                ChangeScreem(RegisterActivity.class,true);
+                //ChangeScreem(RegisterActivity.class,true);
             }
         });
     }
@@ -130,31 +130,25 @@ public class LoginActivity extends BaseActivity {
                        public void onResponse(JSONObject response) {
 
                            try {
+                               Integer resultCode = response.getInt("Code");
+                               if(resultCode == 200){
+                                   JSONObject result = response.getJSONObject("Result");
+                                   user.setName(result.getString("Nombre"));
+                                   user.setRole(result.getString("Rol"));
+                                   user.setUserId(result.getInt("UsuarioId"));
 
+                                   setUserId(result.getInt("UsuarioId"));
+                                   setUserName(result.getString("Nombre"));
+                                   setUserRole(result.getString("Rol"));
 
-                               user.setEmail(emailTextInputEditText.getText().toString());
-                               user.setPassword((passwordTextInputEditText.getText().toString()));
+                                   Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
+                                   startActivity(intent);
 
-
-                               String result = response.getString("Result");
-
-                               if (result != "null") {
-
-                                   User user_Exist =  user.findByUserName(user.getEmail());
-                                   if(user_Exist == null)
-                                     user.save();
-
+                               }else{
                                    Context context = getApplicationContext();
-                                   CharSequence text = "Success";
-                                   int duration = Toast.LENGTH_SHORT;
-
-                                   Toast toast = Toast.makeText(context, result, duration);
+                                   Toast toast = Toast.makeText(context, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT);
                                    toast.show();
-
-                                   //ChangeScreem(ClientTabActivity.class,true);
-                                   ChangeScreem(RegisterActivity.class,true);
                                }
-                               //response.getJSONObject("Result");
                            }catch(JSONException e){
 
                            }

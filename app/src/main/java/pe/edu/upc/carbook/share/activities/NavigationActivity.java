@@ -1,5 +1,6 @@
 package pe.edu.upc.carbook.share.activities;
 
+import android.content.Context;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.client.fragments.AdvertsFragment;
@@ -29,6 +31,10 @@ public class NavigationActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shared_activity_navigation);
+
+        Context context = getApplicationContext();
+        Toast toast = Toast.makeText(context, "Bienvenido " + getUserName(), Toast.LENGTH_SHORT);
+        toast.show();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
