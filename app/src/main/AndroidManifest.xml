@@ -44,7 +44,7 @@
                </intent-filter>
            </activity>
         <activity android:name="pe.edu.upc.carbook.share.activities.NavigationActivity"/>
-       <!--<activity android:name="pe.edu.upc.carbook.RegisterActivity"/>-->
+       <activity android:name="pe.edu.upc.carbook.share.activities.RegisterActivity"/>
 
 
    </application>

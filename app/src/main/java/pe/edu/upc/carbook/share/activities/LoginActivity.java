@@ -20,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pe.edu.upc.carbook.R;
-//import pe.edu.upc.carbook.RegisterActivity;
 import pe.edu.upc.carbook.share.models.User;
 import pe.edu.upc.carbook.share.services.*;
 
@@ -69,7 +68,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onClick(View view){
-                //ChangeScreem(RegisterActivity.class,true);
+                ChangeScreem(RegisterActivity.class,true);
             }
         });
     }
