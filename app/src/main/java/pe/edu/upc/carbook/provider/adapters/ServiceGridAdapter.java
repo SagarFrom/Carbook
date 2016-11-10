@@ -27,7 +27,12 @@ import pe.edu.upc.carbook.share.models.Service;
 
 public class ServiceGridAdapter extends RecyclerView.Adapter<ServiceGridAdapter.ViewHolder> {
 
-    private final List<Service> items;
+    private List<Service> services;
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView clientNameTextView;
@@ -43,13 +48,13 @@ public class ServiceGridAdapter extends RecyclerView.Adapter<ServiceGridAdapter.
     }
 
     public ServiceGridAdapter(List<Service> items) {
-        this.items = items;
+        this.services = items;
     }
 
     @Override
     public int getItemCount() {
 
-        return items.size();
+        return services.size();
     }
 
     @Override
@@ -61,15 +66,15 @@ public class ServiceGridAdapter extends RecyclerView.Adapter<ServiceGridAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Service item = items.get(i);
+        Service item = services.get(i);
 
         Glide.with(viewHolder.itemView.getContext())
-                .load(item.getFirstImageUrl())
+                .load(item.getFirstPhotoUrl())
                 .centerCrop()
                 .into(viewHolder.pictureImageView);
 
-        viewHolder.carInfoTextView.setText(item.getClientCar());
-        viewHolder.clientNameTextView.setText(item.getClientName());
+        viewHolder.carInfoTextView.setText(item.getCustomerCar());
+        viewHolder.clientNameTextView.setText(item.getCustomerName());
 
 //        try{
 //            URL url = new URL(item.getFirstImageUrl());

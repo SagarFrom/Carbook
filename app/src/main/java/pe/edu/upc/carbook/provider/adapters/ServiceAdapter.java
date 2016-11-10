@@ -63,11 +63,11 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
         Service item = Service.services.get(i);
 
         Glide.with(viewHolder.itemView.getContext())
-                .load(item.getFirstImageUrl())
+                .load(item.getFirstPhotoUrl())
                 .centerCrop()
                 .into(viewHolder.pictureImageView);
-        viewHolder.carInfoTextView.setText(item.getClientCar());
-        viewHolder.clientNameTextView.setText(item.getClientName());
+        viewHolder.carInfoTextView.setText(item.getCustomerCar());
+        viewHolder.clientNameTextView.setText(item.getCustomerName());
         viewHolder.descriptionTextView.setText(item.getDescription());
         viewHolder.costTextView.setText(item.getTotal().toString());
     }
