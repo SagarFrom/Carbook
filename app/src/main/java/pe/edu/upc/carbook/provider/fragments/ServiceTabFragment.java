@@ -57,7 +57,7 @@ public class ServiceTabFragment extends Fragment {
         layoutManager = new GridLayoutManager(getActivity(), 2);
         recycler.setLayoutManager(layoutManager);
 
-        adapter = new ServiceGridAdapter(Service.services);
+        adapter = new ServiceGridAdapter();
 
         recycler.setAdapter(adapter);
         return view;
@@ -66,11 +66,12 @@ public class ServiceTabFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        updateServices();
     }
 
     private void updateServices(){
         AndroidNetworking
-                .get(ProviderServices.SERVICES_SOURCES.replace("{1}","1"))
+                .get(ProviderServices.SERVICES_SOURCES)
                 .setPriority(Priority.LOW)
                 .setTag(TAG)
                 .build()
@@ -78,7 +79,7 @@ public class ServiceTabFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(response.getString("status").equalsIgnoreCase("ok")) {
+                            if(response.getString("Code").equalsIgnoreCase("200")) {
                                 services = Service.buildFromJSONArray(response.getJSONArray("Result"));
                                 adapter.setServices(services);
                                 adapter.notifyDataSetChanged();

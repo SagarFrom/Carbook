@@ -5,5 +5,5 @@ package pe.edu.upc.carbook.provider.services;
  */
 
 public class ProviderServices {
-    public static String SERVICES_SOURCES = "http://200.0.118.129/CarbookWS/providers/{id}/services";
+    public static String SERVICES_SOURCES = "http://200.0.118.129/CarbookWS/providers/3/services";
 }

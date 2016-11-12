@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
@@ -47,6 +48,10 @@ public class ServiceGridAdapter extends RecyclerView.Adapter<ServiceGridAdapter.
         }
     }
 
+    public ServiceGridAdapter() {
+        services = new ArrayList<Service>();
+    }
+
     public ServiceGridAdapter(List<Service> items) {
         this.services = items;
     }
@@ -68,10 +73,12 @@ public class ServiceGridAdapter extends RecyclerView.Adapter<ServiceGridAdapter.
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Service item = services.get(i);
 
-        Glide.with(viewHolder.itemView.getContext())
-                .load(item.getFirstPhotoUrl())
-                .centerCrop()
-                .into(viewHolder.pictureImageView);
+        if(item.getFirstPhotoUrl() != ""){
+            Glide.with(viewHolder.itemView.getContext())
+                    .load(item.getFirstPhotoUrl())
+                    .centerCrop()
+                    .into(viewHolder.pictureImageView);
+        }
 
         viewHolder.carInfoTextView.setText(item.getCustomerCar());
         viewHolder.clientNameTextView.setText(item.getCustomerName());

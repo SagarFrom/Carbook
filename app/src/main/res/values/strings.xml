@@ -27,7 +27,7 @@
     <string name="nav_adverts">Mis Anuncios</string>
     <string name="tab_title_personal_info">Datos Personales</string>
     <string name="tab_title_locals">Locales</string>
-    <string name="tab_title_services">Servicios</string>
+    <string name="tab_title_services">Galeria de Servicios</string>
 
     <!--Proveedor-->
     <string name="nav_available_adverts">Anuncios Disponibles</string>
