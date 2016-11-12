@@ -1,67 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#dee4ee"
-    android:orientation="vertical"
-    android:padding="5dp">
-
-    <TextView
-        android:id="@+id/titulo_informacion_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:text="Informacion del usuario"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="2dp"
-        card_view:cardUseCompatPadding="true">
+        android:layout_height="match_parent"
+        android:background="#dee4ee"
+        android:orientation="vertical"
+        android:padding="5dp">
 
-        <GridLayout
+        <TextView
+            android:id="@+id/titulo_informacion_usuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:padding="5dp"
-            android:rowCount="2">
+            android:paddingBottom="8dp"
+            android:text="Informacion del usuario"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="15dp"
-                android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_user_transparent" />
+                card_view:cardCornerRadius="2dp"
+                card_view:cardUseCompatPadding="true">
 
-            <TextView
-                android:id="@+id/texto_nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="15dp"
-                android:text="James Revelo"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:padding="5dp"
+                    android:rowCount="2">
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="8dp"
-                android:src="@mipmap/ic_email" />
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/ic_user_transparent" />
 
-            <TextView
-                android:id="@+id/texto_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="james@mail.com"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </GridLayout>
-    </android.support.v7.widget.CardView>
+                    <!--<TextView-->
+                    <!--android:id="@+id/texto_nombre"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_marginBottom="15dp"-->
+                    <!--android:text="James Revelo"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
 
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:text="Fast Lane S.A.C."
+                            android:layout_gravity="center_vertical"
+                            android:hint="Razón Social"
+                            android:id="@+id/businessNameEditText"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/ic_email" />
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/texto_email"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:text="james@mail.com"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:text="contacto@fastlane.com"
+                            android:layout_gravity="center_vertical"
+                            android:hint="Correo"
+                            android:id="@+id/emailEditText"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/ic_document" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:text="12345678"
+                            android:layout_gravity="center_vertical"
+                            android:hint="Numero de Documento"
+                            android:id="@+id/documentNumberEditText"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@mipmap/ic_role" />
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            android:text="Proveedor"
+                            android:focusable="false"
+                            android:layout_gravity="center_vertical"
+                            android:hint="Rol"
+                            android:id="@+id/roleEditText"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                </GridLayout>
+            </android.support.v7.widget.CardView>
+        </ScrollView>
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/cardview_light_background"
+        android:text="Guadar"
+        android:id="@+id/savePersonalInfoBtn"/>
 </LinearLayout>
+

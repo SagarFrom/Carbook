@@ -25,28 +25,30 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="pe.edu.upc.carbook" />
 
+        <!-- <activity android:name=".share.activities.NavigationActivity"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-        <!--<activity android:name=".share.activities.NavigationActivity">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
+        <activity android:name=".share.activities.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-       <activity android:name=".share.activities.LoginActivity">
-               <intent-filter>
-                   <action android:name="android.intent.action.MAIN" />
-
-                   <category android:name="android.intent.category.LAUNCHER" />
-               </intent-filter>
-           </activity>
-        <activity android:name="pe.edu.upc.carbook.share.activities.NavigationActivity"/>
-       <activity android:name="pe.edu.upc.carbook.share.activities.RegisterActivity"/>
-
-
-   </application>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".share.activities.NavigationActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name=".share.activities.RegisterActivity" />
+        <activity
+            android:name=".provider.activities.LocalActivity"
+            android:label="@string/title_activity_local"
+            android:theme="@style/AppTheme"></activity>
+    </application>
 
 </manifest>

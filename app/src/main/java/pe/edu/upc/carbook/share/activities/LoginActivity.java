@@ -159,8 +159,9 @@ public class LoginActivity extends BaseActivity {
                        public void onError(ANError anError) {
 
                            Log.d(TAG,"fail");
-                           Log.d(TAG,user.getEmail());
-                           Log.d(TAG,user.getPassword());
+                           Log.d(TAG,anError.getMessage());
+                           Log.d(TAG,anError.getErrorBody());
+                           Log.d(TAG,anError.getErrorDetail());
                        }
                     }
 

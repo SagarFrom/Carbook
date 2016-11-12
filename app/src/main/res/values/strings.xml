@@ -59,6 +59,7 @@
         <item>Usuario</item>
         <item>Proveedor</item>
     </string-array>
+    <string name="title_activity_local">LocalActivity</string>
 </resources>
 
 

@@ -150,32 +150,16 @@ public class RegisterActivity extends BaseActivity {
                     public void onResponse(JSONObject response) {
 
                         try{
-                            /*
-                            String cadena = textEditEmail.getText().toString() +
-                                    textEditEmail.getText().toString() +
-                                    textEditDate.getText().toString() +
-                                    textEditRuc.getText().toString() +
-                                    textEditPassword.getText().toString() +
-                                    textEditCompanyName.getText().toString() +
-                                    textEditDni.getText().toString() +
-                                    textEditFatherLastName.getText().toString() +
-                                    textEditMotherLastName.getText().toString() +
-                                    textEditName.getText().toString() +
-                                    spinnerRol.getSelectedItem().toString() ;
 
-                            Toast.makeText(getApplicationContext(), cadena, Toast.LENGTH_SHORT).show();
-                            */
-
-                            String result = response.getString("Result");
-
-                            if(result != "null"){
+                            Integer resultCode = response.getInt("Code");
+                            if(resultCode == 200){
                                 Toast toast = Toast.makeText(getApplicationContext(),"Success: " +
                                         response.getString("Result"),Toast.LENGTH_SHORT);
                                 toast.show();
                             }
                             else
                             {
-                                Toast toast = Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(getApplicationContext(),response.getInt("Message"),Toast.LENGTH_SHORT);
                                 toast.show();
                             }
 
