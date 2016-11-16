@@ -11,23 +11,30 @@ import java.util.List;
 public class User extends SugarRecord {
 
     private Integer UserId;
-    private String email;
+    private String Email;
     private String password;
     private String Name;
     private String LastName;
     private String Role;
+    private String DocumentNumber;
+    private String BusinessName;
+    private String DNI;
+
 
     public User(){
 
     }
 
-    public User(Integer userId, String email, String password, String name, String lastName, String role) {
-        this.UserId = userId;
-        this.email = email;
+    public User(Integer userId, String email, String password, String name, String lastName, String role, String documentNumber, String businessName, String DNI) {
+        UserId = userId;
+        Email = email;
         this.password = password;
         Name = name;
         LastName = lastName;
         Role = role;
+        DocumentNumber = documentNumber;
+        BusinessName = businessName;
+        this.DNI = DNI;
     }
 
     public Integer getUserId() {
@@ -39,11 +46,11 @@ public class User extends SugarRecord {
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.Email = email;
     }
 
     public String getPassword() {
@@ -76,6 +83,30 @@ public class User extends SugarRecord {
 
     public void setRole(String role) {
         Role = role;
+    }
+
+    public String getDocumentNumber() {
+        return DocumentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+        DocumentNumber = documentNumber;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+    public String getBusinessName() {
+        return BusinessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        BusinessName = businessName;
     }
 
     public static User findByUserName(String username){

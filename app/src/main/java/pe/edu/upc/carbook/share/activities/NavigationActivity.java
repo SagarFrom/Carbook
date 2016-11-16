@@ -23,6 +23,7 @@ import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.client.fragments.AdvertsFragment;
 import pe.edu.upc.carbook.provider.fragments.ProfileFragment;
 import pe.edu.upc.carbook.provider.fragments.ServiceFragment;
+import pe.edu.upc.carbook.share.models.User;
 
 public class NavigationActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
@@ -32,8 +33,21 @@ public class NavigationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shared_activity_navigation);
 
+        mPrefs = getPreferences(MODE_PRIVATE);
         Context context = getApplicationContext();
-        Toast toast = Toast.makeText(context, "Bienvenido " + getUserName(), Toast.LENGTH_SHORT);
+
+        User sessionUser = getUserOnPreferences();
+        String name = "";
+        switch (sessionUser.getRole()){
+            case "PRO":
+                name = sessionUser.getBusinessName();
+                break;
+            case "CLI":
+                name = sessionUser.getName();
+                break;
+        }
+
+        Toast toast = Toast.makeText(context, "Bienvenido " + name, Toast.LENGTH_SHORT);
         toast.show();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);

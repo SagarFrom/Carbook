@@ -36,6 +36,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mPrefs = getPreferences(MODE_PRIVATE);
         //Update user
         user = new User();
 
@@ -132,13 +133,27 @@ public class LoginActivity extends BaseActivity {
                                Integer resultCode = response.getInt("Code");
                                if(resultCode == 200){
                                    JSONObject result = response.getJSONObject("Result");
-                                   user.setName(result.getString("Nombre"));
+                                   user.setEmail(result.getString("Correo"));
                                    user.setRole(result.getString("Rol"));
                                    user.setUserId(result.getInt("UsuarioId"));
 
-                                   setUserId(result.getInt("UsuarioId"));
-                                   setUserName(result.getString("Nombre"));
-                                   setUserRole(result.getString("Rol"));
+                                   switch (user.getRole()){
+                                       case "PRO":
+                                           user.setDocumentNumber(result.getString("NumeroDocumento"));
+                                           user.setBusinessName(result.getString("RazonSocial"));
+                                           break;
+                                       case "CLI":
+                                           user.setName(result.getString("Nombre"));
+                                           user.setLastName(result.getString("ApellidoPaterno"));
+                                           user.setDNI(result.getString("DNI"));
+                                           break;
+                                   }
+
+                                   saveUserOnPreferences(user);
+
+//                                   setUserId(result.getInt("UsuarioId"));
+//                                   setUserName(result.getString("Nombre"));
+//                                   setUserRole(result.getString("Rol"));
 
                                    Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
                                    startActivity(intent);
