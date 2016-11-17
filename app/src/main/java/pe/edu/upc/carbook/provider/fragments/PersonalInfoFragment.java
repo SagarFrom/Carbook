@@ -43,8 +43,7 @@ public class PersonalInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.provider_fragment_personal_info, container, false);
-        fragmentContext = this.getActivity();
-        spm = new SharedPreferencesManager(fragmentContext);
+        spm = new SharedPreferencesManager(this.getActivity());
         userSession = spm.getUserOnPreferences();
 
         businessNameEditText = (TextInputEditText) view.findViewById(R.id.businessNameEditText);
@@ -76,12 +75,15 @@ public class PersonalInfoFragment extends Fragment {
 
                                     Integer resultCode = response.getInt("Code");
                                     if(resultCode == 200){
-                                        Toast toast = Toast.makeText(fragmentContext,response.getInt("Message"),Toast.LENGTH_SHORT);
+                                        userSession.setBusinessName(businessNameEditText.getText().toString());
+                                        userSession.setDocumentNumber(documentNumberEditText.getText().toString());
+                                        spm.saveUserOnPreferences(userSession);
+                                        Toast toast = Toast.makeText(getActivity(),response.getString("Message"),Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
                                     else
                                     {
-                                        Toast toast = Toast.makeText(fragmentContext,response.getString("Code") + response.getInt("Message"),Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(getActivity(),response.getString("Code") + response.getString("Message"),Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
 

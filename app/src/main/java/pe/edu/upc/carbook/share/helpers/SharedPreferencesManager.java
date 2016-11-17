@@ -21,6 +21,7 @@ public class SharedPreferencesManager {
     public SharedPreferencesManager(Context context) {
         this.context = context;
     }
+
     public void saveUserOnPreferences(User user){
         sp = PreferenceManager.getDefaultSharedPreferences(context);
         JSONObject userJson = new JSONObject();
