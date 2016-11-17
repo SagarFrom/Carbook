@@ -15,7 +15,7 @@ import pe.edu.upc.carbook.share.models.User;
  */
 
 public class BaseActivity extends AppCompatActivity {
-    SharedPreferences mPrefs;
+//    SharedPreferences mPrefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
@@ -94,18 +94,18 @@ public class BaseActivity extends AppCompatActivity {
 //        return sharedPreferences.getString("USR_ROLE", "");
 //    }
 
-    public void saveUserOnPreferences(User user){
-        SharedPreferences.Editor prefsEditor = mPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(user); // myObject - instance of MyObject
-        prefsEditor.putString("userSession", json);
-        prefsEditor.commit();
-    }
-
-    public User getUserOnPreferences(){
-        Gson gson = new Gson();
-        String json = mPrefs.getString("userSession", "");
-        return gson.fromJson(json, User.class);
-    }
+//    public void saveUserOnPreferences(User user){
+//        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+//        Gson gson = new Gson();
+//        String json = gson.toJson(user); // myObject - instance of MyObject
+//        prefsEditor.putString("userSession", json);
+//        prefsEditor.commit();
+//    }
+//
+//    public User getUserOnPreferences(){
+//        Gson gson = new Gson();
+//        String json = mPrefs.getString("userSession", "");
+//        return gson.fromJson(json, User.class);
+//    }
 
 }

@@ -33,19 +33,19 @@ public class NavigationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shared_activity_navigation);
 
-        mPrefs = getPreferences(MODE_PRIVATE);
+//        mPrefs = getPreferences(MODE_PRIVATE);
         Context context = getApplicationContext();
 
-        User sessionUser = getUserOnPreferences();
+//        User sessionUser = getUserOnPreferences();
         String name = "";
-        switch (sessionUser.getRole()){
-            case "PRO":
-                name = sessionUser.getBusinessName();
-                break;
-            case "CLI":
-                name = sessionUser.getName();
-                break;
-        }
+//        switch (sessionUser.getRole()){
+//            case "PRO":w
+//                name = sessionUser.getBusinessName();
+//                break;
+//            case "CLI":
+//                name = sessionUser.getName();
+//                break;
+//        }
 
         Toast toast = Toast.makeText(context, "Bienvenido " + name, Toast.LENGTH_SHORT);
         toast.show();

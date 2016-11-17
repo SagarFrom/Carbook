@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mPrefs = getPreferences(MODE_PRIVATE);
+//        mPrefs = getPreferences(MODE_PRIVATE);
         //Update user
         user = new User();
 
@@ -149,7 +149,7 @@ public class LoginActivity extends BaseActivity {
                                            break;
                                    }
 
-                                   saveUserOnPreferences(user);
+//                                   saveUserOnPreferences(user);
 
 //                                   setUserId(result.getInt("UsuarioId"));
 //                                   setUserName(result.getString("Nombre"));
