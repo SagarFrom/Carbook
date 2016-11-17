@@ -30,6 +30,7 @@ public class NavigationActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     SharedPreferencesManager spm;
     User userSession;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +99,14 @@ public class NavigationActivity extends BaseActivity {
 
         switch (itemDrawer.getItemId()) {
             case R.id.nav_item_profile:
-                genericFragment = new ProfileFragment();
+                switch (userSession.getRole()){
+                    case "PRO":
+                        genericFragment = new ProfileFragment();
+                        break;
+                    case "CLI":
+                        //POR HACER: INICIALIZACION DEL PERFIL DE CLIENTE
+                        break;
+                }
                 break;
             case R.id.nav_item_adverts:
                 // Fragmento para la sección Cuenta
@@ -111,7 +119,14 @@ public class NavigationActivity extends BaseActivity {
                 // Iniciar actividad de configuración
                 break;
             case R.id.nav_item_services:
-                genericFragment = new ServiceFragment();
+                switch (userSession.getRole()){
+                    case "PRO":
+                        genericFragment = new ServiceFragment();
+                        break;
+                    case "CLI":
+                        //POR HACER: INICIALIZACION DEL SERVICIOS DEL CLIENTE
+                        break;
+                }
                 break;
         }
         if (genericFragment != null) {
@@ -129,9 +144,18 @@ public class NavigationActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.shared_menu_drawer, menu);
-        menu.findItem(R.id.nav_item_profile).setVisible(false);
-        menu.findItem(R.id.nav_item_profile).setEnabled(false);
-        menu.findItem(R.id.nav_item_postulations).setVisible(false);
+        navigationView = (NavigationView)findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        switch (userSession.getRole()){
+            case "PRO":
+                nav_Menu.findItem(R.id.nav_item_adverts).setVisible(false);
+                break;
+            case "CLI":
+                nav_Menu.findItem(R.id.nav_item_postulations).setVisible(false);
+                nav_Menu.findItem(R.id.nav_item_av_adverts).setVisible(false);
+                break;
+        }
+
         return true;
     }
 

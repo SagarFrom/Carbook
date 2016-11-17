@@ -21,7 +21,7 @@
 
     <!--Shared-->
     <string name="nav_profile">Perfil</string>
-    <string name="nav_services">Servicios</string>
+    <string name="nav_services">Mis Servicios</string>
 
     <!--Cliente-->
     <string name="nav_adverts">Mis Anuncios</string>
