@@ -24,7 +24,9 @@ import java.util.List;
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.provider.adapters.LocalAdapter;
 import pe.edu.upc.carbook.provider.services.ProviderServices;
+import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
 import pe.edu.upc.carbook.share.models.Local;
+import pe.edu.upc.carbook.share.models.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +38,8 @@ public class LocalFragment extends Fragment {
     private LocalAdapter adapter;
     private List<Local> locals;
     private static String TAG = "Provider Locals";
+    SharedPreferencesManager spm;
+    User userSession;
 
     public LocalFragment() {
         // Required empty public constructor
@@ -44,6 +48,8 @@ public class LocalFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        spm = new SharedPreferencesManager(this.getActivity());
+        userSession = spm.getUserOnPreferences();
     }
 
     @Override
@@ -68,8 +74,9 @@ public class LocalFragment extends Fragment {
     }
 
     private void updateServices(){
+        String url = ProviderServices.LOCALS_SOURCES.replace("{1}",userSession.getUserId().toString());
         AndroidNetworking
-                .get(ProviderServices.LOCALS_SOURCES)
+                .get(url)
                 .setPriority(Priority.LOW)
                 .setTag(TAG)
                 .build()

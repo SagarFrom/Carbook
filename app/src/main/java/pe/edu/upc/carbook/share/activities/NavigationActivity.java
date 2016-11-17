@@ -23,29 +23,33 @@ import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.client.fragments.AdvertsFragment;
 import pe.edu.upc.carbook.provider.fragments.ProfileFragment;
 import pe.edu.upc.carbook.provider.fragments.ServiceFragment;
+import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
 import pe.edu.upc.carbook.share.models.User;
 
 public class NavigationActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
+    SharedPreferencesManager spm;
+    User userSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shared_activity_navigation);
+        spm = new SharedPreferencesManager(NavigationActivity.this);
+        userSession = spm.getUserOnPreferences();
 
-//        mPrefs = getPreferences(MODE_PRIVATE);
+        invalidateOptionsMenu();
+
         Context context = getApplicationContext();
-
-//        User sessionUser = getUserOnPreferences();
         String name = "";
-//        switch (sessionUser.getRole()){
-//            case "PRO":w
-//                name = sessionUser.getBusinessName();
-//                break;
-//            case "CLI":
-//                name = sessionUser.getName();
-//                break;
-//        }
+        switch (userSession.getRole()){
+            case "PRO":
+                name = userSession.getBusinessName();
+                break;
+            case "CLI":
+                name = userSession.getName();
+                break;
+        }
 
         Toast toast = Toast.makeText(context, "Bienvenido " + name, Toast.LENGTH_SHORT);
         toast.show();
@@ -123,7 +127,11 @@ public class NavigationActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.shared_menu_drawer, menu);
+        menu.findItem(R.id.nav_item_profile).setVisible(false);
+        menu.findItem(R.id.nav_item_profile).setEnabled(false);
+        menu.findItem(R.id.nav_item_postulations).setVisible(false);
         return true;
     }
 

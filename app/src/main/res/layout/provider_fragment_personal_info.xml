@@ -42,15 +42,6 @@
                         android:layout_marginRight="10dp"
                         android:src="@mipmap/ic_user_transparent" />
 
-                    <!--<TextView-->
-                    <!--android:id="@+id/texto_nombre"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_marginBottom="15dp"-->
-                    <!--android:text="James Revelo"-->
-                    <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
-
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -73,14 +64,6 @@
                         android:layout_marginBottom="15dp"
                         android:layout_marginRight="10dp"
                         android:src="@mipmap/ic_email" />
-
-                    <!--<TextView-->
-                    <!--android:id="@+id/texto_email"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:text="james@mail.com"-->
-                    <!--android:textAppearance="?android:attr/textAppearanceSmall" />-->
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"

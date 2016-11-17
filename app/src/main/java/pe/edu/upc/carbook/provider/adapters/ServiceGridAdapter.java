@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +74,7 @@ public class ServiceGridAdapter extends RecyclerView.Adapter<ServiceGridAdapter.
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Service item = services.get(i);
 
-        if(item.getFirstPhotoUrl() != ""){
+        if(!TextUtils.isEmpty(item.getFirstPhotoUrl())){
             Glide.with(viewHolder.itemView.getContext())
                     .load(item.getFirstPhotoUrl())
                     .centerCrop()

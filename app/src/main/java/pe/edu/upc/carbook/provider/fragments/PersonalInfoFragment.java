@@ -1,6 +1,7 @@
 package pe.edu.upc.carbook.provider.fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
@@ -21,12 +22,17 @@ import org.json.JSONObject;
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.provider.services.ProviderServices;
 import pe.edu.upc.carbook.share.activities.NavigationActivity;
+import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
+import pe.edu.upc.carbook.share.models.User;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class PersonalInfoFragment extends Fragment {
-    TextInputEditText businessNameEditText,documentNumberEditText;
+    TextInputEditText businessNameEditText,documentNumberEditText,emailEditText;
+    SharedPreferencesManager spm;
+    User userSession;
+    Context fragmentContext;
 
     public PersonalInfoFragment() {
         // Required empty public constructor
@@ -37,9 +43,18 @@ public class PersonalInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.provider_fragment_personal_info, container, false);
+        fragmentContext = this.getActivity();
+        spm = new SharedPreferencesManager(fragmentContext);
+        userSession = spm.getUserOnPreferences();
 
         businessNameEditText = (TextInputEditText) view.findViewById(R.id.businessNameEditText);
         documentNumberEditText = (TextInputEditText) view.findViewById(R.id.documentNumberEditText);
+        emailEditText = (TextInputEditText) view.findViewById(R.id.emailEditText);
+
+        businessNameEditText.setText(userSession.getBusinessName());
+        documentNumberEditText.setText(userSession.getDocumentNumber());
+        emailEditText.setText(userSession.getEmail());
+
 
         Button btnSave = (Button)view.findViewById(R.id.savePersonalInfoBtn);
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +64,7 @@ public class PersonalInfoFragment extends Fragment {
                         .addBodyParameter("RazonSocial",businessNameEditText.getText().toString())
                         .addBodyParameter("NumeroDocumento",documentNumberEditText.getText().toString())
                         .addBodyParameter("Rol","PRO")
-                        .addBodyParameter("UsuarioId","3")
+                        .addBodyParameter("UsuarioId",userSession.getUserId().toString())
                         .setTag("Test")
                         .setPriority(Priority.MEDIUM)
                         .build()
@@ -61,12 +76,12 @@ public class PersonalInfoFragment extends Fragment {
 
                                     Integer resultCode = response.getInt("Code");
                                     if(resultCode == 200){
-                                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),response.getInt("Message"),Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(fragmentContext,response.getInt("Message"),Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
                                     else
                                     {
-                                        Toast toast = Toast.makeText(getActivity().getApplicationContext(),response.getString("Code") + response.getInt("Message"),Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(fragmentContext,response.getString("Code") + response.getInt("Message"),Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
 

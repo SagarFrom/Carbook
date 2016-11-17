@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import pe.edu.upc.carbook.R;
+import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
 import pe.edu.upc.carbook.share.models.User;
 import pe.edu.upc.carbook.share.services.*;
 
@@ -28,6 +29,7 @@ public class LoginActivity extends BaseActivity {
     TextInputEditText emailTextInputEditText,
             passwordTextInputEditText;
     User user;
+    SharedPreferencesManager spm;
 
     private static String TAG = "test";
 
@@ -35,8 +37,8 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        spm = new SharedPreferencesManager(LoginActivity.this);
 
-//        mPrefs = getPreferences(MODE_PRIVATE);
         //Update user
         user = new User();
 
@@ -149,11 +151,7 @@ public class LoginActivity extends BaseActivity {
                                            break;
                                    }
 
-//                                   saveUserOnPreferences(user);
-
-//                                   setUserId(result.getInt("UsuarioId"));
-//                                   setUserName(result.getString("Nombre"));
-//                                   setUserRole(result.getString("Rol"));
+                                   spm.saveUserOnPreferences(user);
 
                                    Intent intent = new Intent(LoginActivity.this,NavigationActivity.class);
                                    startActivity(intent);
