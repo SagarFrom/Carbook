@@ -47,8 +47,18 @@
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".share.activities.RegisterActivity" />
         <activity
-            android:name=".provider.activities.LocalActivity"
+            android:name=".provider.activities.LocalDetailActivity"
             android:label="@string/title_activity_local"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".provider.activities.LocalManageActivity"
+            android:label="@string/title_activity_local_manage"
+            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".provider.activities.LocalManageActivity"
+            android:label="@string/title_activity_local_manage"
+            android:theme="@style/AppTheme" />
             android:theme="@style/AppTheme" />
         <activity
             android:name=".client.activities.AdvertDetailActivity"

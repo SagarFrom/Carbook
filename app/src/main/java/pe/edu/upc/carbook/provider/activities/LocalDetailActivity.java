@@ -1,8 +1,6 @@
 package pe.edu.upc.carbook.provider.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,12 +9,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.share.models.Local;
 
-public class LocalActivity extends AppCompatActivity {
+public class LocalDetailActivity extends AppCompatActivity {
 
     ImageView pictureImageView;
     TextView nameTextView,addressTextView,capacityTextView;

@@ -76,6 +76,7 @@ public class NavigationActivity extends BaseActivity {
             ab.setHomeAsUpIndicator(R.drawable.drawer_toggle);
             ab.setDisplayHomeAsUpEnabled(true);
         }
+//        toolbar.getMenu().clear();
 
     }
 

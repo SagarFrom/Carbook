@@ -61,6 +61,7 @@
     </string-array>
     <string name="title_activity_local">LocalActivity</string>
     <string name="title_activity_advert_detail">Detalle de Anuncio</string>
+    <string name="title_activity_local_manage">LocalManageActivity</string>
 </resources>
 
 

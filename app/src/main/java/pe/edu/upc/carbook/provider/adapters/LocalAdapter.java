@@ -7,13 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
-import pe.edu.upc.carbook.provider.activities.LocalActivity;
+import pe.edu.upc.carbook.provider.activities.LocalDetailActivity;
+import pe.edu.upc.carbook.provider.activities.LocalManageActivity;
 import pe.edu.upc.carbook.share.models.Local;
 
 /**
@@ -33,6 +35,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
         public TextView localNameTextView;
         public TextView addressTextView;
         public TextView capacityTextView;
+        public ImageButton editLocalImageButton;
 
         public ViewHolder(View v) {
             super(v);
@@ -40,6 +43,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
             localNameTextView = (TextView) v.findViewById(R.id.localNameTextView);
             addressTextView = (TextView) v.findViewById(R.id.addressTextView);
             capacityTextView = (TextView) v.findViewById(R.id.capacityTextView);
+            editLocalImageButton = (ImageButton) v.findViewById(R.id.editLocalImageButton);
         }
     }
 
@@ -70,10 +74,22 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
         viewHolder.localCardView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent localIntent = new Intent(v.getContext(), LocalActivity.class);
+                Intent localIntent = new Intent(v.getContext(), LocalDetailActivity.class);
                 Bundle bundle = locals.get(i).toBundle();
                 localIntent.putExtras(bundle);
                 v.getContext().startActivity(localIntent);
+            }
+        });
+
+        viewHolder.editLocalImageButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LocalManageActivity.class);
+                Bundle bundle = locals.get(i).toBundle();
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
+
+
             }
         });
 

@@ -14,12 +14,13 @@ import java.util.List;
  */
 
 public class Local {
+    private int LocalId;
     private String Name;
     private String Address;
-    private Integer Capacity;
-    private Double Latitude;
-    private Double Longitude;
-    private Integer ProviderId;
+    private int Capacity;
+    private double Latitude;
+    private double Longitude;
+    private int ProviderId;
     private String FirstPhotoUrl;
     private String Status;
 
@@ -28,7 +29,8 @@ public class Local {
     public Local() {
     }
 
-    public Local(String name, String address, Integer capacity, Double latitude, Double longitude, Integer providerId, String firstPhotoUrl, String status) {
+    public Local(int localId, String name, String address, int capacity, double latitude, double longitude, int providerId, String firstPhotoUrl, String status, List<GenericPhoto> gallery) {
+        LocalId = localId;
         Name = name;
         Address = address;
         Capacity = capacity;
@@ -37,6 +39,7 @@ public class Local {
         ProviderId = providerId;
         FirstPhotoUrl = firstPhotoUrl;
         Status = status;
+        Gallery = gallery;
     }
 
     public String getName() {
@@ -61,7 +64,7 @@ public class Local {
         return Capacity;
     }
 
-    public Local setCapacity(Integer capacity) {
+    public Local setCapacity(int capacity) {
         Capacity = capacity;
         return this;
     }
@@ -70,7 +73,7 @@ public class Local {
         return Latitude;
     }
 
-    public Local setLatitude(Double latitude) {
+    public Local setLatitude(double latitude) {
         Latitude = latitude;
         return this;
     }
@@ -79,7 +82,7 @@ public class Local {
         return Longitude;
     }
 
-    public Local setLongitude(Double longitude) {
+    public Local setLongitude(double longitude) {
         Longitude = longitude;
         return this;
 
@@ -89,7 +92,7 @@ public class Local {
         return ProviderId;
     }
 
-    public Local setProviderId(Integer providerId) {
+    public Local setProviderId(int providerId) {
         ProviderId = providerId;
         return this;
     }
@@ -112,13 +115,28 @@ public class Local {
         return this;
     }
 
-    public void setGallery(List<GenericPhoto> gallery) {
+    public Integer getLocalId() {
+        return LocalId;
+    }
+
+    public Local setLocalId(int localId) {
+        LocalId = localId;
+        return this;
+    }
+
+    public List<GenericPhoto> getGallery() {
+        return Gallery;
+    }
+
+    public Local setGallery(List<GenericPhoto> gallery) {
         Gallery = gallery;
+        return this;
     }
 
     public static Local buildFromJSONObject(JSONObject jsonService){
         Local local = new Local();
         try{
+            local.setLocalId(jsonService.getInt("LocalId"));
             local.setName(jsonService.getString("Name"));
             local.setAddress(jsonService.getString("Address"));
             local.setName(jsonService.getString("Name"));
@@ -150,19 +168,23 @@ public class Local {
 
     public static Local buildFromBundle(Bundle bundle) {
         Local local = new Local();
-        local.setName(bundle.getString("Name"))
-                .setAddress(bundle.getString("Address"))
-                .setCapacity(bundle.getInt("Capacity"))
-                .setLatitude(bundle.getDouble("Latitude"))
-                .setLongitude(bundle.getDouble("Longitude"))
-                .setProviderId(bundle.getInt("ProviderId"))
-                .setFirstPhotoUrl(bundle.getString("FirstPhotoUrl"))
-                .setStatus(bundle.getString("Status"));
+        if(bundle != null){
+            local.setName(bundle.getString("Name"))
+                    .setLocalId(bundle.getInt("LocalId"))
+                    .setAddress(bundle.getString("Address"))
+                    .setCapacity(bundle.getInt("Capacity"))
+                    .setLatitude(bundle.getDouble("Latitude"))
+                    .setLongitude(bundle.getDouble("Longitude"))
+                    .setProviderId(bundle.getInt("ProviderId"))
+                    .setFirstPhotoUrl(bundle.getString("FirstPhotoUrl"))
+                    .setStatus(bundle.getString("Status"));
+        }
         return local;
     }
 
     public Bundle toBundle() {
         Bundle bundle = new Bundle();
+        bundle.putInt("LocalId",this.getLocalId());
         bundle.putString("Name", this.getName());
         bundle.putString("Address", this.getAddress());
         bundle.putInt("Capacity", this.getCapacity());

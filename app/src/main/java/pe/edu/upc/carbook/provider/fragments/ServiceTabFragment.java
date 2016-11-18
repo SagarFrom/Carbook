@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -51,7 +50,7 @@ public class ServiceTabFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.provider_fragment_recycler, container, false);
+        View view = inflater.inflate(R.layout.provider_content_fragment_local, container, false);
 
         recycler = (RecyclerView) view.findViewById(R.id.recycler);
         layoutManager = new GridLayoutManager(getActivity(), 2);

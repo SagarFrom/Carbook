@@ -1,8 +1,10 @@
 package pe.edu.upc.carbook.provider.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +24,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
+import pe.edu.upc.carbook.provider.activities.LocalManageActivity;
 import pe.edu.upc.carbook.provider.adapters.LocalAdapter;
 import pe.edu.upc.carbook.provider.services.ProviderServices;
 import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
@@ -55,7 +58,15 @@ public class LocalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.provider_fragment_recycler, container, false);
+        View view = inflater.inflate(R.layout.provider_fragment_local, container, false);
+
+        FloatingActionButton myFab = (FloatingActionButton)  view.findViewById(R.id.fab);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LocalManageActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         recycler = (RecyclerView)view.findViewById(R.id.recycler);
         linearLayout = new LinearLayoutManager(getActivity());
