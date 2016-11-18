@@ -49,7 +49,16 @@
         <activity
             android:name=".provider.activities.LocalActivity"
             android:label="@string/title_activity_local"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".client.activities.AdvertDetailActivity"
+            android:label="@string/title_activity_advert_detail"
+            android:parentActivityName=".share.activities.NavigationActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pe.edu.upc.carbook.share.activities.NavigationActivity" />
+        </activity>
     </application>
 
 </manifest>

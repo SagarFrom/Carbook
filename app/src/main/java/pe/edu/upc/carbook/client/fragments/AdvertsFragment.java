@@ -55,7 +55,6 @@ public class AdvertsFragment extends Fragment {
 
         advertAdapter = new AdvertAdapter();
         advertAdapter.setAdverts(adverts);
-        advertAdapter.setActivity(getActivity());
         linearLayout = new LinearLayoutManager(getActivity());
         advertsRecyclerView = (RecyclerView)view.findViewById(R.id.advertsRecyclerView);
         advertsRecyclerView.setLayoutManager(linearLayout);
