@@ -1,10 +1,8 @@
 package pe.edu.upc.carbook.provider.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,27 +23,27 @@ import org.json.JSONObject;
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
-import pe.edu.upc.carbook.provider.activities.LocalManageActivity;
-import pe.edu.upc.carbook.provider.adapters.LocalAdapter;
+import pe.edu.upc.carbook.provider.adapters.AvailableAdvertAdapter;
+import pe.edu.upc.carbook.provider.adapters.PostulationAdapter;
 import pe.edu.upc.carbook.provider.services.ProviderServices;
 import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
-import pe.edu.upc.carbook.share.models.Local;
+import pe.edu.upc.carbook.share.models.Advert;
 import pe.edu.upc.carbook.share.models.User;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LocalFragment extends Fragment {
-
-    private RecyclerView recycler;
-    private LinearLayoutManager linearLayout;
-    private LocalAdapter adapter;
-    private List<Local> locals;
-    private static String TAG = "Provider Locals";
-    SharedPreferencesManager spm;
+public class PostulationFragment extends Fragment {
+    private RecyclerView reclycler;
+    private LinearLayoutManager layoutManager;
+    private PostulationAdapter postulationAdapter;
+    private List<Advert> postulations;
     User userSession;
+    SharedPreferencesManager spm;
 
-    public LocalFragment() {
+    private static String TAG = "Provider Services";
+
+    public PostulationFragment() {
         // Required empty public constructor
     }
 
@@ -59,36 +57,25 @@ public class LocalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.provider_fragment_local, container, false);
+        View view = inflater.inflate(R.layout.provider_fragment_postulation, container, false);
+        reclycler = (RecyclerView) view.findViewById(R.id.recycler);
+        layoutManager = new LinearLayoutManager(getActivity());
+        reclycler.setLayoutManager(layoutManager);
 
-        FloatingActionButton myFab = (FloatingActionButton)  view.findViewById(R.id.fab);
-        myFab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LocalManageActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
-
-        recycler = (RecyclerView)view.findViewById(R.id.recycler);
-        linearLayout = new LinearLayoutManager(getActivity());
-        recycler.setLayoutManager(linearLayout);
-
-        adapter = new LocalAdapter();
-        recycler.setAdapter(adapter);
-
+        postulationAdapter = new PostulationAdapter();
+        reclycler.setAdapter(postulationAdapter);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updateServices();
+        updateAdverts();
     }
 
-    private void updateServices(){
-        String url = ProviderServices.LOCALS_SOURCES.replace("{1}",userSession.getUserId().toString());
+    private void updateAdverts(){
         AndroidNetworking
-                .get(url)
+                .get(ProviderServices.ADVERTS_SOURCES.replace("{1}",userSession.getUserId().toString()).replace("{2}","false"))
                 .setPriority(Priority.LOW)
                 .setTag(TAG)
                 .build()
@@ -97,10 +84,10 @@ public class LocalFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             if(response.getString("Code").equalsIgnoreCase("200")) {
-                                locals = Local.buildFromJSONArray(response.getJSONArray("Result"));
-                                adapter.setLocals(locals);
-                                adapter.notifyDataSetChanged();
-                            } else{
+                                postulations = Advert.buildFromJSONArray(response.getJSONArray("Result"));
+                                postulationAdapter.setPostulations(postulations);
+                                postulationAdapter.notifyDataSetChanged();
+                            } else {
                                 Toast toast = Toast.makeText(getActivity(),response.getString("Code") + response.getString("Message"),Toast.LENGTH_SHORT);
                                 toast.show();
                             }

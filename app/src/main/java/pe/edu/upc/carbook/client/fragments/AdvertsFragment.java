@@ -78,7 +78,7 @@ public class AdvertsFragment extends Fragment {
     }
     private void updateAdverts(){
         AndroidNetworking
-                .get(clientServices.ADVERTS_SOURCES + "/2")
+                .get(clientServices.ADVERTS_SOURCES + "/2/false")//mandarle siempre el segundo parametro de false, indipendientemente del Id del cliente
                 //.addPathParameter("/","2") //Ahorita esta en duro
                 .setPriority(Priority.LOW)
                 .setTag("TEST")

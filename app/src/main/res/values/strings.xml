@@ -5,6 +5,8 @@
 
     <string name="title_services">Servicios</string>
 
+    <string name="requiredMessage">Campo requerido</string>
+
     <!-- TODO: For register-->
     <string name="add_mother_lastname">Mother LastName</string>
     <string name="add_father_lastname">Father LastName</string>

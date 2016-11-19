@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.client.fragments.AdvertsFragment;
+import pe.edu.upc.carbook.provider.fragments.AvailableAdvertFragment;
+import pe.edu.upc.carbook.provider.fragments.PostulationFragment;
 import pe.edu.upc.carbook.provider.fragments.ProfileFragment;
 import pe.edu.upc.carbook.provider.fragments.ServiceFragment;
 import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
@@ -114,10 +116,10 @@ public class NavigationActivity extends BaseActivity {
                 genericFragment = new AdvertsFragment();
                 break;
             case R.id.nav_item_av_adverts:
-                // Fragmento para la sección Categorías
+                genericFragment = new AvailableAdvertFragment();
                 break;
             case R.id.nav_item_postulations:
-                // Iniciar actividad de configuración
+                genericFragment = new PostulationFragment();
                 break;
             case R.id.nav_item_services:
                 switch (userSession.getRole()){
