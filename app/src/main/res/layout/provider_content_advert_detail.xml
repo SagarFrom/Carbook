@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_advert_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="pe.edu.upc.carbook.provider.activities.AdvertDetailActivity"
+    tools:showIn="@layout/provider_activity_advert_detail">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/tools"
+        app:cardCornerRadius="4dp"
+        android:layout_margin="1dp"
+        android:id="@+id/advertClientDetailView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/default_image"
+                android:id="@+id/pictureImageView"
+                android:layout_gravity="center_horizontal"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:paddingTop="10dp"
+                android:text="Juan Carlos Seminario"
+                android:id="@+id/clientNameTextView"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:paddingTop="10dp"
+                android:text="Sample Car - Model"
+                android:id="@+id/carInfoTextView"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:text="Sample description"
+                android:lines="2"
+                android:id="@+id/descriptionTextView"/>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:columnCount="2"
+                android:rowCount="3">
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:text="Fecha Creación:"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sample Date Create"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:paddingStart="10dp"
+                    android:id="@+id/beginDateTextView"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:layout_column="0"
+                    android:layout_row="1"
+                    android:paddingTop="5dp"
+                    android:text="Fecha Fin:"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sample Date End"
+                    android:layout_column="1"
+                    android:layout_row="1"
+                    android:paddingStart="10dp"
+                    android:id="@+id/endDateTextView"/>
+            </GridLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="right"
+                android:paddingTop="15dp"
+                android:weightSum="1">
+                <Button
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:id="@+id/postulateButton"
+                    android:text="POSTULAR"
+                    android:textColor="@color/icons"
+                    android:backgroundTint="@color/colorPrimary"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>
