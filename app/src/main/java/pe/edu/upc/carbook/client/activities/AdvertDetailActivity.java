@@ -1,5 +1,6 @@
 package pe.edu.upc.carbook.client.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,7 @@ public class AdvertDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+        verGaleriaButton = (Button) findViewById(R.id.verGaleriaButton);
         firstPhotoANImageView = (ANImageView) findViewById(R.id.firstPhotoANImageView);
         nameCarModelTextView = (TextView) findViewById(R.id.nameCarModelTextView);
         descriptionTextView = (TextView) findViewById(R.id.descriptionTextView);
@@ -51,6 +53,17 @@ public class AdvertDetailActivity extends AppCompatActivity {
         fechaCreacionTextView.setText(advert.getCreationDate());
         fechaFinTextView.setText(advert.getEndDate());
         cantidadPostulantesTextView.setText(advert.getCantApplications());
+
+        verGaleriaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itemItent  = new Intent(v.getContext(), AdvertDetailGalleryActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idAdvert",advert.getAdvertId());
+                itemItent.putExtras(bundle);
+                v.getContext().startActivity(itemItent);
+            }
+        });
     }
 
 }

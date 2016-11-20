@@ -56,11 +56,6 @@
             android:theme="@style/AppTheme" />
         android:theme="@style/AppTheme" />
         <activity
-            android:name=".provider.activities.LocalManageActivity"
-            android:label="@string/title_activity_local_manage"
-            android:theme="@style/AppTheme" />
-        android:theme="@style/AppTheme" />
-        <activity
             android:name=".client.activities.AdvertDetailActivity"
             android:label="@string/title_activity_advert_detail"
             android:parentActivityName=".share.activities.NavigationActivity"
@@ -73,7 +68,16 @@
             android:name=".provider.activities.AdvertDetailActivity"
             android:label="@string/title_activity_advert_detail"
             android:theme="@style/AppTheme" />
-        <activity android:name=".provider.activities.PostulateActivity"></activity>
+        <activity android:name=".provider.activities.PostulateActivity" />
+        <activity
+            android:name=".client.activities.AdvertDetailGalleryActivity"
+            android:label="@string/title_activity_advert_detail_gallery"
+            android:parentActivityName=".client.activities.AdvertDetailActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pe.edu.upc.carbook.client.activities.AdvertDetailActivity" />
+        </activity>
     </application>
 
 </manifest>

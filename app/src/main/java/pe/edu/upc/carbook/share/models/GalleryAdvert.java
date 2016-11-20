@@ -1,13 +1,20 @@
 package pe.edu.upc.carbook.share.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by usuario on 4/11/2016.
  */
 
 public class GalleryAdvert {
 
-    public Integer AdvertGalleryId;
-    public Integer AdvertId;
+    public String AdvertGalleryId;
+    public String AdvertId;
     public String Name;
     public String ImageUrl;
     public String Status;
@@ -15,19 +22,19 @@ public class GalleryAdvert {
     public GalleryAdvert() {
     }
 
-    public Integer getAdvertGalleryId() {
+    public String getAdvertGalleryId() {
         return AdvertGalleryId;
     }
 
-    public void setAdvertGalleryId(Integer advertGalleryId) {
+    public void setAdvertGalleryId(String advertGalleryId) {
         AdvertGalleryId = advertGalleryId;
     }
 
-    public Integer getAdvertId() {
+    public String getAdvertId() {
         return AdvertId;
     }
 
-    public void setAdvertId(Integer advertId) {
+    public void setAdvertId(String advertId) {
         AdvertId = advertId;
     }
 
@@ -53,5 +60,33 @@ public class GalleryAdvert {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public static GalleryAdvert buildFromJSONObject(JSONObject jsonGallery){
+        GalleryAdvert galleryAdvert = new GalleryAdvert();
+        try{
+            galleryAdvert.setAdvertGalleryId(jsonGallery.getString("AdvertGalleryId"));
+            galleryAdvert.setStatus(jsonGallery.getString("Status"));
+            galleryAdvert.setAdvertId(jsonGallery.getString("AdvertId"));
+            galleryAdvert.setName(jsonGallery.getString("Name"));
+            galleryAdvert.setImageUrl(jsonGallery.getString("ImageUrl"));
+            return galleryAdvert;
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return galleryAdvert;
+    }
+
+    public static List<GalleryAdvert> buildFromJSONArray(JSONArray jsonResult){
+        List<GalleryAdvert> galleryAdverts = new ArrayList<>();
+        int galleryAdvertCount = jsonResult.length();
+        for(int i = 0 ; i < galleryAdvertCount; i++) {
+            try{
+                galleryAdverts.add(buildFromJSONObject(jsonResult.getJSONObject(i)));
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return galleryAdverts;
     }
 }
