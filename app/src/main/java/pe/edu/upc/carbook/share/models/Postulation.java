@@ -69,6 +69,10 @@ public class Postulation{
     }
 
     public String getQuotation() {
+        return quotation;
+    }
+
+    public String getQuotationWithSoles(){
         return "S/. " + quotation;
     }
 

@@ -9,15 +9,24 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.widget.ANImageView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import pe.edu.upc.carbook.R;
+import pe.edu.upc.carbook.client.services.clientServices;
 import pe.edu.upc.carbook.share.models.Postulation;
 
 public class PostulationDetailActivity extends AppCompatActivity {
@@ -26,6 +35,7 @@ public class PostulationDetailActivity extends AppCompatActivity {
     private TextView providerNameTextView, descriptionTextView,quotationTextView;
     private RatingBar providerRankRatingBar;
     private AppCompatButton acceptQuotationButton;
+    private static String TAG = "Carbook";
     private Postulation postulation;
     final Context context = this;
 
@@ -58,7 +68,7 @@ public class PostulationDetailActivity extends AppCompatActivity {
         logoProviderANImageView.setImageUrl(urlImageDefault);
         providerNameTextView.setText(postulation.getProviderName());
         descriptionTextView.setText(postulation.getDescription());
-        quotationTextView.setText(postulation.getQuotation());
+        quotationTextView.setText(postulation.getQuotationWithSoles());
         providerRankRatingBar.setRating(Float.parseFloat(postulation.getProviderRank()));
 
         acceptQuotationButton.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +87,7 @@ public class PostulationDetailActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog,int id) {
                                 // if this button is clicked, close
                                 // current activity
+                                AcceptPostulation();
                                 PostulationDetailActivity.this.finish();
                             }
                         })
@@ -95,6 +106,38 @@ public class PostulationDetailActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+    }
+
+    private void AcceptPostulation(){
+        AndroidNetworking.post(clientServices.ADVERTS_ACCEPT_POSTULATION)
+                .addBodyParameter("PostulationId",postulation.getPostulationId())
+                .setTag(TAG)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            if(response.getString("Code").equalsIgnoreCase("200")){
+                                Toast toast = Toast.makeText(context,response.getString("Message"),Toast.LENGTH_SHORT);
+                                toast.show();
+                            }else{
+                                Toast toast = Toast.makeText(context,response.getString("Code") + response.getString("Message"),Toast.LENGTH_SHORT);
+                                toast.show();
+                                Log.d(TAG, "Response Error: " + response.getString("Message"));
+                                Log.d(TAG, "Response Error: " + response.getString("ExceptionMessage"));
+                            }
+                        }catch (JSONException e){
+                            Log.d(TAG,"Error: " + e.getLocalizedMessage());
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d(TAG, "onError " + anError.getErrorBody());
+                    }
+                });
     }
 
 }

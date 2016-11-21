@@ -9,4 +9,5 @@ import pe.edu.upc.carbook.share.constants.Constants;
 public class clientServices {
 
     public static String ADVERTS_SOURCES = Constants.URL_SERVER + "/adverts/{1}/{2}";
+    public static String ADVERTS_ACCEPT_POSTULATION = Constants.URL_SERVER + "/adverts/acceptPostulation";
 }

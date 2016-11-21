@@ -44,7 +44,7 @@ public class PostulationAdapter extends RecyclerView.Adapter<PostulationAdapter.
     public void onBindViewHolder(PostulationAdapter.ViewHolder holder, final int position) {
         String urlImageDefault = "http://www.bayaderavirtual.info/imagenes/BOSS%20LOGO.jpg";
         holder.providerNameTextView.setText(postulations.get(position).getProviderName());
-        holder.quotationTextView.setText(postulations.get(position).getQuotation());
+        holder.quotationTextView.setText(postulations.get(position).getQuotationWithSoles());
         holder.logoProviderANImageView.setDefaultImageResId(R.drawable.default_image);
         holder.logoProviderANImageView.setErrorImageResId(R.mipmap.ic_launcher);
         holder.logoProviderANImageView.setImageUrl(urlImageDefault);
