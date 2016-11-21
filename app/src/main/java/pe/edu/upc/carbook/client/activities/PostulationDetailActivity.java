@@ -1,8 +1,11 @@
 package pe.edu.upc.carbook.client.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +27,7 @@ public class PostulationDetailActivity extends AppCompatActivity {
     private RatingBar providerRankRatingBar;
     private AppCompatButton acceptQuotationButton;
     private Postulation postulation;
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +64,35 @@ public class PostulationDetailActivity extends AppCompatActivity {
         acceptQuotationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
+                // set title
+                alertDialogBuilder.setTitle("Aceptar Cotización");
+
+                // set dialog message
+                alertDialogBuilder
+                        .setMessage("¡Presione SI para Aceptar!")
+                        .setCancelable(false)
+                        .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, close
+                                // current activity
+                                PostulationDetailActivity.this.finish();
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
             }
         });
     }
