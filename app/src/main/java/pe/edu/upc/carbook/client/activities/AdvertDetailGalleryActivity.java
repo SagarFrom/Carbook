@@ -31,10 +31,10 @@ import pe.edu.upc.carbook.share.models.GalleryAdvert;
 import pe.edu.upc.carbook.share.models.User;
 
 public class AdvertDetailGalleryActivity extends AppCompatActivity {
-    RecyclerView galleryPhotosRecyclerView;
-    AdvertDetailGalleryAdapter advertDetailGalleryAdapter;
-    GridLayoutManager galleryPhotosLayoutManager;
-    List<GalleryAdvert> galleryAdverts;
+    private RecyclerView galleryPhotosRecyclerView;
+    private AdvertDetailGalleryAdapter advertDetailGalleryAdapter;
+    private GridLayoutManager galleryPhotosLayoutManager;
+    private List<GalleryAdvert> galleryAdverts;
     private String IdAdvert;
     private static String TAG = "Carbook";
 
@@ -57,8 +57,8 @@ public class AdvertDetailGalleryActivity extends AppCompatActivity {
         Log.d(TAG,"IdAdvert: " + IdAdvert);
 
         galleryPhotosRecyclerView = (RecyclerView) findViewById(R.id.galleryPhotosRecyclerView);
-        //int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2;
-        galleryPhotosLayoutManager = new GridLayoutManager(this,2);
+        int spanCount = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ? 3 : 2;
+        galleryPhotosLayoutManager = new GridLayoutManager(this,spanCount);
         galleryAdverts = new ArrayList<>();
         advertDetailGalleryAdapter = new AdvertDetailGalleryAdapter();
         advertDetailGalleryAdapter.setGalleryAdverts(galleryAdverts);
@@ -90,13 +90,12 @@ public class AdvertDetailGalleryActivity extends AppCompatActivity {
 
     private void updateGalleryPhotos(){
         if(IdAdvert.isEmpty()) IdAdvert = "0";
-        String parameters = "/" + IdAdvert + "/photos";
-        String url = clientServices.ADVERTS_SOURCES + parameters;
+        String url = clientServices.ADVERTS_SOURCES.replace("{1}",IdAdvert).replace("{2}","photos");
         Log.d(TAG,"URL: " + url);
         AndroidNetworking
                 .get(url)
                 .setPriority(Priority.LOW)
-                .setTag("TEST")
+                .setTag(TAG)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override

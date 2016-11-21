@@ -39,12 +39,11 @@ public class AdvertsFragment extends Fragment {
 
     private LinearLayoutManager linearLayout;
     private List<Advert> adverts = new ArrayList<>();
-    AdvertAdapter advertAdapter;
+    private AdvertAdapter advertAdapter;
     private RecyclerView advertsRecyclerView;
     private static String TAG = "Carbook";
-    private int IdUsuario;
-    SharedPreferencesManager spm;
-    User userSession;
+    private SharedPreferencesManager spm;
+    private User userSession;
 
     public AdvertsFragment() {
     }
@@ -61,7 +60,6 @@ public class AdvertsFragment extends Fragment {
 
         spm = new SharedPreferencesManager(getActivity());
         userSession = spm.getUserOnPreferences();
-        IdUsuario = userSession.getUserId();
 
         advertAdapter = new AdvertAdapter();
         advertAdapter.setAdverts(adverts);
@@ -87,10 +85,9 @@ public class AdvertsFragment extends Fragment {
         updateAdverts();
     }
     private void updateAdverts(){
-        String paramenters = "/"+IdUsuario + "/false";
+        String url = clientServices.ADVERTS_SOURCES.replace("{1}", userSession.getUserId().toString()).replace("{2}","false");
         AndroidNetworking
-                .get(clientServices.ADVERTS_SOURCES + paramenters)//mandarle siempre el segundo parametro de false, indipendientemente del Id del cliente
-                //.addPathParameter("/","2") //Ahorita esta en duro
+                .get(url)
                 .setPriority(Priority.LOW)
                 .setTag("TEST")
                 .build()

@@ -68,7 +68,7 @@ public class Postulation{
     }
 
     public String getQuotation() {
-        return quotation;
+        return "S/. " + quotation;
     }
 
     public void setQuotation(String quotation) {

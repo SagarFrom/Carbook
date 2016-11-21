@@ -41,12 +41,6 @@ public class AdvertDetailGalleryAdapter extends RecyclerView.Adapter<AdvertDetai
         holder.pictureGalleryAdvertANImageView.setDefaultImageResId(R.mipmap.ic_launcher);
         holder.pictureGalleryAdvertANImageView.setErrorImageResId(R.mipmap.ic_launcher);
         holder.pictureGalleryAdvertANImageView.setImageUrl(galleryAdverts.get(position).getImageUrl());
-        holder.galleryPhotoAdvertCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override
