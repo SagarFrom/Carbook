@@ -38,6 +38,7 @@ public class AdvertDetailActivity extends AppCompatActivity {
             }
         });
         verGaleriaButton = (Button) findViewById(R.id.verGaleriaButton);
+        verPostulacionesButton = (Button) findViewById(R.id.verPostulacionesButton);
         firstPhotoANImageView = (ANImageView) findViewById(R.id.firstPhotoANImageView);
         nameCarModelTextView = (TextView) findViewById(R.id.nameCarModelTextView);
         descriptionTextView = (TextView) findViewById(R.id.descriptionTextView);
@@ -64,6 +65,18 @@ public class AdvertDetailActivity extends AppCompatActivity {
                 v.getContext().startActivity(itemItent);
             }
         });
+
+        verPostulacionesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent itemItent  = new Intent(v.getContext(), PostulationsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("idAdvert",advert.getAdvertId());
+                itemItent.putExtras(bundle);
+                v.getContext().startActivity(itemItent);
+            }
+        });
+
     }
 
 }

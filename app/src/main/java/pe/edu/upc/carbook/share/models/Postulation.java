@@ -125,8 +125,29 @@ public class Postulation{
     public static Postulation buildFromBundle(Bundle bundle){
         Postulation postulation = new Postulation();
         if(bundle!=null){
-
+            postulation.setAdvertId(bundle.getString("AdvertId"));
+            postulation.setPostulationId(bundle.getString("PostulationId"));
+            postulation.setProviderId(bundle.getString("ProviderId"));
+            postulation.setProviderName(bundle.getString("ProviderName"));
+            postulation.setProviderRank(bundle.getString("ProviderRank"));
+            postulation.setQuotation(bundle.getString("Quotation"));
+            postulation.setStatus(bundle.getString("Status"));
+            postulation.setPostulationStatus(bundle.getString("PostulationStatus"));
         }
         return postulation;
     }
+
+    public Bundle toBundle(){
+        Bundle bundle = new Bundle();
+        bundle.putString("AdvertId",this.getAdvertId());
+        bundle.putString("PostulationId",this.getPostulationId());
+        bundle.putString("ProviderId",this.getProviderId());
+        bundle.putString("ProviderName",this.getProviderName());
+        bundle.putString("ProviderRank",this.getProviderRank());
+        bundle.putString("Quotation",this.getQuotation());
+        bundle.putString("Status",this.getStatus());
+        bundle.putString("PostulationStatus",this.getPostulationStatus());
+        return bundle;
+    }
+
 }
