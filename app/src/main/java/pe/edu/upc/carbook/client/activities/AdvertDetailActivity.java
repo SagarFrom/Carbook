@@ -48,7 +48,7 @@ public class AdvertDetailActivity extends AppCompatActivity {
         firstPhotoANImageView.setImageUrl(advert.getFirstPhotoUrl());
         firstPhotoANImageView.setErrorImageResId(R.mipmap.ic_launcher);
         firstPhotoANImageView.setDefaultImageResId(R.mipmap.ic_launcher);
-        nameCarModelTextView.setText(advert.getCarId()); // POR AHORA PRIMERO QUIERO QUE VER SI FUNCIONA EL INTENT
+        nameCarModelTextView.setText(advert.getCarInfo()); // POR AHORA PRIMERO QUIERO QUE VER SI FUNCIONA EL INTENT
         descriptionTextView.setText(advert.getDescription());
         fechaCreacionTextView.setText(advert.getCreationDate());
         fechaFinTextView.setText(advert.getEndDate());

@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
@@ -42,6 +44,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder
         holder.fechaCreacionTextView.setText(adverts.get(position).getCreationDate());
         holder.descripcionTextView.setText(adverts.get(position).getDescription());
         holder.cantidadPostulantesTextView.setText(adverts.get(position).getCantApplications());
+        holder.carInfoTextView.setText(adverts.get(position).getCarInfo());
         Glide.with(holder.itemView.getContext())
                 .load(adverts.get(position).getFirstPhotoUrl())
                 .centerCrop()
@@ -66,6 +69,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder
         CardView advertClientCardView;
         TextView fechaCreacionTextView, descripcionTextView, cantidadPostulantesTextView;
         ImageView firstPhotoImageView;
+        TextView carInfoTextView;
         //advertClientCardView
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +77,7 @@ public class AdvertAdapter extends RecyclerView.Adapter<AdvertAdapter.ViewHolder
             fechaCreacionTextView = (TextView) itemView.findViewById(R.id.fechaCreacionTextView);
             descripcionTextView = (TextView) itemView.findViewById(R.id.descriptionTextView);
             cantidadPostulantesTextView = (TextView) itemView.findViewById(R.id.cantidadPostulantesTextView);
+            carInfoTextView = (TextView) itemView.findViewById(R.id.carInfoTextView);
             firstPhotoImageView = (ImageView) itemView.findViewById(R.id.firstPhotoImageView);
         }
     }

@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:paddingTop="10dp"
+                android:textSize="16dp"
                 android:text="Sample Car - Model"
                 android:id="@+id/nameCarModelTextView"/>
             <TextView

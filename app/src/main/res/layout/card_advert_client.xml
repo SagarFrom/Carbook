@@ -26,9 +26,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/carInfoTextView"
+                android:text="1987 Volkswagen Santana"
+                android:paddingTop="20dp"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/fechaCreacionTextView"
                 android:text="28/10/2016"
-                android:paddingTop="20dp"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_width="wrap_content"
