@@ -38,7 +38,7 @@ public class AdvertDetailGalleryAdapter extends RecyclerView.Adapter<AdvertDetai
     public void onBindViewHolder(AdvertDetailGalleryAdapter.ViewHolder holder, int position) {
         holder.nameAdvertGalleryTextView.setText(galleryAdverts.get(position).getName());
         holder.statusTextView.setText(galleryAdverts.get(position).getStatus());
-        holder.pictureGalleryAdvertANImageView.setDefaultImageResId(R.mipmap.ic_launcher);
+        holder.pictureGalleryAdvertANImageView.setDefaultImageResId(R.drawable.default_image);
         holder.pictureGalleryAdvertANImageView.setErrorImageResId(R.mipmap.ic_launcher);
         holder.pictureGalleryAdvertANImageView.setImageUrl(galleryAdverts.get(position).getImageUrl());
     }

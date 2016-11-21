@@ -20,6 +20,7 @@ public class Postulation{
     private String providerName;
     private String providerRank;
     private String quotation;
+    private String description;
     private String status;
     private String postulationStatus;
 
@@ -100,6 +101,7 @@ public class Postulation{
             postulation.setProviderName(jsonPostulation.getString("ProviderName"));
             postulation.setProviderRank(jsonPostulation.getString("ProviderRank"));
             postulation.setQuotation(jsonPostulation.getString("Quotation"));
+            postulation.setDescription(jsonPostulation.getString("Description"));
             postulation.setStatus(jsonPostulation.getString("Status"));
             postulation.setPostulationStatus(jsonPostulation.getString("PostulationStatus"));
             return postulation;
@@ -133,6 +135,7 @@ public class Postulation{
             postulation.setQuotation(bundle.getString("Quotation"));
             postulation.setStatus(bundle.getString("Status"));
             postulation.setPostulationStatus(bundle.getString("PostulationStatus"));
+            postulation.setDescription(bundle.getString("Description"));
         }
         return postulation;
     }
@@ -145,9 +148,17 @@ public class Postulation{
         bundle.putString("ProviderName",this.getProviderName());
         bundle.putString("ProviderRank",this.getProviderRank());
         bundle.putString("Quotation",this.getQuotation());
+        bundle.putString("Description",this.getDescription());
         bundle.putString("Status",this.getStatus());
         bundle.putString("PostulationStatus",this.getPostulationStatus());
         return bundle;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

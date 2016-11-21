@@ -66,6 +66,7 @@
     <string name="title_activity_local_manage">LocalManageActivity</string>
     <string name="title_activity_advert_detail_gallery">Galería Anuncio</string>
     <string name="title_activity_postulations">Postulaciones</string>
+    <string name="title_activity_postulation_detail">Detalle Postulación</string>
 </resources>
 
 

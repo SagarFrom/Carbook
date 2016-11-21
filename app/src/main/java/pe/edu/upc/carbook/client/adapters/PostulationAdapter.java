@@ -1,5 +1,7 @@
 package pe.edu.upc.carbook.client.adapters;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,8 @@ import com.androidnetworking.widget.ANImageView;
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
+import pe.edu.upc.carbook.client.activities.PostulationDetailActivity;
+import pe.edu.upc.carbook.client.activities.PostulationsActivity;
 import pe.edu.upc.carbook.share.models.Postulation;
 
 /**
@@ -37,7 +41,7 @@ public class PostulationAdapter extends RecyclerView.Adapter<PostulationAdapter.
     }
 
     @Override
-    public void onBindViewHolder(PostulationAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(PostulationAdapter.ViewHolder holder, final int position) {
         String urlImageDefault = "http://www.bayaderavirtual.info/imagenes/BOSS%20LOGO.jpg";
         holder.providerNameTextView.setText(postulations.get(position).getProviderName());
         holder.quotationTextView.setText(postulations.get(position).getQuotation());
@@ -49,7 +53,10 @@ public class PostulationAdapter extends RecyclerView.Adapter<PostulationAdapter.
         holder.postulationCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent itemItent  = new Intent(v.getContext(), PostulationDetailActivity.class);
+                Bundle bundle = postulations.get(position).toBundle();
+                itemItent.putExtras(bundle);
+                v.getContext().startActivity(itemItent);
             }
         });
     }

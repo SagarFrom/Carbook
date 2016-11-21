@@ -87,6 +87,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pe.edu.upc.carbook.client.activities.AdvertDetailActivity" />
         </activity>
+        <activity
+            android:name=".client.activities.PostulationDetailActivity"
+            android:label="@string/title_activity_postulation_detail"
+            android:parentActivityName=".client.activities.PostulationsActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pe.edu.upc.carbook.client.activities.PostulationsActivity" />
+        </activity>
     </application>
 
 </manifest>

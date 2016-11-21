@@ -18,10 +18,10 @@ import pe.edu.upc.carbook.share.models.Advert;
 public class AdvertDetailActivity extends AppCompatActivity {
 
     private Advert advert;
-    ANImageView firstPhotoANImageView;
-    TextView nameCarModelTextView, descriptionTextView, fechaCreacionTextView,
-            fechaFinTextView, cantidadPostulantesTextView;
-    Button verGaleriaButton, verPostulacionesButton;
+    private ANImageView firstPhotoANImageView;
+    private TextView nameCarModelTextView, descriptionTextView, fechaCreacionTextView,
+                fechaFinTextView, cantidadPostulantesTextView;
+    private Button verGaleriaButton, verPostulacionesButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class AdvertDetailActivity extends AppCompatActivity {
         advert = Advert.buildFromBundle(getIntent().getExtras());
         firstPhotoANImageView.setImageUrl(advert.getFirstPhotoUrl());
         firstPhotoANImageView.setErrorImageResId(R.mipmap.ic_launcher);
-        firstPhotoANImageView.setDefaultImageResId(R.mipmap.ic_launcher);
+        firstPhotoANImageView.setDefaultImageResId(R.drawable.default_image);
         nameCarModelTextView.setText(advert.getCarInfo()); // POR AHORA PRIMERO QUIERO QUE VER SI FUNCIONA EL INTENT
         descriptionTextView.setText(advert.getDescription());
         fechaCreacionTextView.setText(advert.getCreationDate());
