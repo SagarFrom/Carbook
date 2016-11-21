@@ -51,7 +51,6 @@ public class DataClientFragment extends Fragment {
         emailEditText = (TextInputEditText)view.findViewById(R.id.emailEditText);
         documentNumberEditText = (TextInputEditText)view.findViewById(R.id.documentNumberEditText);
         saveDataClientButton = (Button)view.findViewById(R.id.saveDataClientButton);
-
         clientNameEditText.setText(userSession.getName());
         emailEditText.setText(userSession.getEmail());
         documentNumberEditText.setText(userSession.getDocumentNumber());
