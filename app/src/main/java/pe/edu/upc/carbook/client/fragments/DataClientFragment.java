@@ -39,7 +39,6 @@ public class DataClientFragment extends Fragment {
     public DataClientFragment(){
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.client_frangment_data,container, false);
