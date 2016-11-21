@@ -1,5 +1,6 @@
 package pe.edu.upc.carbook.client.fragments;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.upc.carbook.R;
+import pe.edu.upc.carbook.client.activities.AdvertCreateActivity;
 import pe.edu.upc.carbook.client.adapters.AdvertAdapter;
 import pe.edu.upc.carbook.client.services.clientServices;
 import pe.edu.upc.carbook.share.activities.NavigationActivity;
@@ -72,6 +74,8 @@ public class AdvertsFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent itemItent  = new Intent(view.getContext(), AdvertCreateActivity.class);
+                view.getContext().startActivity(itemItent);
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }

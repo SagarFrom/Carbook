@@ -96,6 +96,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pe.edu.upc.carbook.client.activities.PostulationsActivity" />
         </activity>
+        <activity
+            android:name=".client.activities.AdvertCreateActivity"
+            android:label="@string/title_activity_advert_create"
+            android:parentActivityName=".share.activities.NavigationActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pe.edu.upc.carbook.share.activities.NavigationActivity" />
+        </activity>
     </application>
 
 </manifest>
