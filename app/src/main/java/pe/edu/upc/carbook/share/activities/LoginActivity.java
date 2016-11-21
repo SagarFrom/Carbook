@@ -173,8 +173,8 @@ public class LoginActivity extends BaseActivity {
 
                            Log.d(TAG,"fail");
                            Log.d(TAG,anError.getMessage());
-                           Log.d(TAG,anError.getErrorBody());
-                           Log.d(TAG,anError.getErrorDetail());
+                           //Log.d(TAG,anError.getErrorBody());
+                           //Log.d(TAG,anError.getErrorDetail());
                        }
                     }
 

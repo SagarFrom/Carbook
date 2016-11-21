@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -67,46 +68,63 @@ public class LocalManageActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AndroidNetworking.post(ProviderServices.LOCALS_MANAGE)
-                        .addBodyParameter("LocalId",local.getLocalId().toString())
-                        .addBodyParameter("ProviderId",userSession.getUserId().toString())
-                        .addBodyParameter("Name",nameEditText.getText().toString())
-                        .addBodyParameter("Address",addressEditView.getText().toString())
-                        .addBodyParameter("Capacity",capacityEditView.getText().toString())
-                        .addBodyParameter("Latitude","7.546464646400000")
-                        .addBodyParameter("Longitude","8.879846516110000")
-                        .addBodyParameter("Status","ACT")
-                        .setTag("Test")
-                        .setPriority(Priority.MEDIUM)
-                        .build()
-                        .getAsJSONObject(new JSONObjectRequestListener() {
-                            @Override
-                            public void onResponse(JSONObject response) {
 
-                                try{
+                boolean hasRequired = true;
+                if(TextUtils.isEmpty(nameEditText.getText().toString())) {
+                    nameEditText.setError("Campo requerido");
+                    hasRequired = false;
+                }
+                if(TextUtils.isEmpty(addressEditView.getText().toString())) {
+                    addressEditView.setError("Campo requerido");
+                    hasRequired = false;
+                }
+                if(TextUtils.isEmpty(capacityEditView.getText().toString())) {
+                    capacityEditView.setError("Campo requerido");
+                    hasRequired = false;
+                }
 
-                                    Integer resultCode = response.getInt("Code");
-                                    if(resultCode == 200){
+                if(hasRequired){
+                    AndroidNetworking.post(ProviderServices.LOCALS_MANAGE)
+                            .addBodyParameter("LocalId",local.getLocalId().toString())
+                            .addBodyParameter("ProviderId",userSession.getUserId().toString())
+                            .addBodyParameter("Name",nameEditText.getText().toString())
+                            .addBodyParameter("Address",addressEditView.getText().toString())
+                            .addBodyParameter("Capacity",capacityEditView.getText().toString())
+                            .addBodyParameter("Latitude","7.546464646400000")
+                            .addBodyParameter("Longitude","8.879846516110000")
+                            .addBodyParameter("Status","ACT")
+                            .setTag("Test")
+                            .setPriority(Priority.MEDIUM)
+                            .build()
+                            .getAsJSONObject(new JSONObjectRequestListener() {
+                                @Override
+                                public void onResponse(JSONObject response) {
 
-                                        Toast toast = Toast.makeText(LocalManageActivity.this,response.getString("Message"),Toast.LENGTH_SHORT);
-                                        toast.show();
+                                    try{
+
+                                        Integer resultCode = response.getInt("Code");
+                                        if(resultCode == 200){
+
+                                            Toast toast = Toast.makeText(LocalManageActivity.this,response.getString("Message"),Toast.LENGTH_SHORT);
+                                            toast.show();
+                                        }
+                                        else
+                                        {
+                                            Toast toast = Toast.makeText(LocalManageActivity.this,response.getString("Code") + response.getString("Message"),Toast.LENGTH_SHORT);
+                                            toast.show();
+                                        }
+
+
+                                    }catch(JSONException e){
+
                                     }
-                                    else
-                                    {
-                                        Toast toast = Toast.makeText(LocalManageActivity.this,response.getString("Code") + response.getString("Message"),Toast.LENGTH_SHORT);
-                                        toast.show();
-                                    }
-
-
-                                }catch(JSONException e){
-
                                 }
-                            }
 
-                            @Override
-                            public void onError(ANError anError) {
-                            }
-                        });
+                                @Override
+                                public void onError(ANError anError) {
+                                }
+                            });
+                }
             }
         });
     }

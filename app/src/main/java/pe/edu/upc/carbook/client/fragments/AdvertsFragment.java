@@ -26,7 +26,10 @@ import java.util.List;
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.client.adapters.AdvertAdapter;
 import pe.edu.upc.carbook.client.services.clientServices;
+import pe.edu.upc.carbook.share.activities.NavigationActivity;
+import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
 import pe.edu.upc.carbook.share.models.Advert;
+import pe.edu.upc.carbook.share.models.User;
 
 /**
  * Created by usuario on 6/11/2016.
@@ -39,6 +42,9 @@ public class AdvertsFragment extends Fragment {
     AdvertAdapter advertAdapter;
     private RecyclerView advertsRecyclerView;
     private static String TAG = "Carbook";
+    private int IdUsuario;
+    SharedPreferencesManager spm;
+    User userSession;
 
     public AdvertsFragment() {
     }
@@ -52,6 +58,10 @@ public class AdvertsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.client_fragment_adverts, container, false);
+
+        spm = new SharedPreferencesManager(getActivity());
+        userSession = spm.getUserOnPreferences();
+        IdUsuario = userSession.getUserId();
 
         advertAdapter = new AdvertAdapter();
         advertAdapter.setAdverts(adverts);
@@ -77,8 +87,9 @@ public class AdvertsFragment extends Fragment {
         updateAdverts();
     }
     private void updateAdverts(){
+        String paramenters = "/"+IdUsuario + "/false";
         AndroidNetworking
-                .get(clientServices.ADVERTS_SOURCES + "/2")
+                .get(clientServices.ADVERTS_SOURCES + paramenters)//mandarle siempre el segundo parametro de false, indipendientemente del Id del cliente
                 //.addPathParameter("/","2") //Ahorita esta en duro
                 .setPriority(Priority.LOW)
                 .setTag("TEST")

@@ -1,4 +1,4 @@
-package pe.edu.upc.carbook.share.Constants;
+package pe.edu.upc.carbook.share.constants;
 
 /**
  * Created by Miguel on 12/11/2016.

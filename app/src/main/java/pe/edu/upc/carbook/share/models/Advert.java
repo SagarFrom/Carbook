@@ -20,18 +20,21 @@ public class Advert {
     public String AdvertId;
     public String ProviderId;
     public String ClientId;
+    public String ClientName;
     public String CarId;
+    public String CarInfo;
     public String Description;
     public String Quotation;
     public String CreationDate;
     public String EndDate;
     public String SelectionDate;
     public String Comments;
-    public String Ranking;
+    public String ClientRating;
     public String Status;
     public String FirstPhotoUrl;
     public List<GalleryAdvert> Gallery;
     public String CantApplications;
+    public String PostulationStatus;
 
     public Advert() {
         Gallery = new ArrayList<>();
@@ -110,12 +113,12 @@ public class Advert {
         Comments = comments;
     }
 
-    public String getRanking() {
-        return Ranking;
+    public String getClientRating() {
+        return ClientRating;
     }
 
-    public void setRanking(String ranking) {
-        Ranking = ranking;
+    public void setClientRating(String clientRating) {
+        ClientRating = clientRating;
     }
 
     public String getStatus() {
@@ -149,12 +152,37 @@ public class Advert {
     public void setCantApplications(String cantApplications) {
         CantApplications = cantApplications;
     }
+
     public String getCarId() {
         return CarId;
     }
 
     public void setCarId(String carId) {
         CarId = carId;
+    }
+
+    public String getClientName() {
+        return ClientName;
+    }
+
+    public void setClientName(String clientName) {
+        ClientName = clientName;
+    }
+
+    public String getCarInfo() {
+        return CarInfo;
+    }
+
+    public void setCarInfo(String carInfo) {
+        CarInfo = carInfo;
+    }
+
+    public String getPostulationStatus() {
+        return PostulationStatus;
+    }
+
+    public void setPostulationStatus(String postulationStatus) {
+        PostulationStatus = postulationStatus;
     }
 
     public static Advert buildFromJSONObject(JSONObject jsonAdvert){
@@ -169,10 +197,13 @@ public class Advert {
             advert.setCreationDate(jsonAdvert.getString("CreationDate"));
             advert.setEndDate(jsonAdvert.getString("EndDate"));
             advert.setComments(jsonAdvert.getString("Comments"));
-            advert.setRanking(jsonAdvert.getString("Ranking"));
+            advert.setClientRating(jsonAdvert.getString("ClientRating"));
             advert.setStatus(jsonAdvert.getString("Status"));
             advert.setFirstPhotoUrl(jsonAdvert.getString("FirstPhotoUrl"));
             advert.setCantApplications(jsonAdvert.getString("NPostulations"));
+            advert.setClientName(jsonAdvert.getString("ClientName"));
+            advert.setCarInfo(jsonAdvert.getString("CarInfo"));
+            advert.setPostulationStatus(jsonAdvert.getString("PostulationStatus"));
             return advert;
         }catch (JSONException e){
             e.printStackTrace();
@@ -195,19 +226,24 @@ public class Advert {
 
     public static Advert buildFromBundle(Bundle bundle){
         Advert advert = new Advert();
-        advert.setAdvertId(bundle.getString("advertId"));
-        advert.setClientId(bundle.getString("clientId"));
-        advert.setCarId(bundle.getString("carId"));
-        advert.setProviderId(bundle.getString("providerId"));
-        advert.setDescription(bundle.getString("description"));
-        advert.setQuotation(bundle.getString("quotation"));
-        advert.setCreationDate(bundle.getString("creationDate"));
-        advert.setEndDate(bundle.getString("endDate"));
-        advert.setComments(bundle.getString("comments"));
-        advert.setRanking(bundle.getString("ranking"));
-        advert.setStatus(bundle.getString("status"));
-        advert.setFirstPhotoUrl(bundle.getString("firstPhotoUrl"));
-        advert.setCantApplications(bundle.getString("cantApplications"));
+        if(bundle != null){
+            advert.setAdvertId(bundle.getString("advertId"));
+            advert.setClientId(bundle.getString("clientId"));
+            advert.setCarId(bundle.getString("carId"));
+            advert.setProviderId(bundle.getString("providerId"));
+            advert.setDescription(bundle.getString("description"));
+            advert.setQuotation(bundle.getString("quotation"));
+            advert.setCreationDate(bundle.getString("creationDate"));
+            advert.setEndDate(bundle.getString("endDate"));
+            advert.setComments(bundle.getString("comments"));
+            advert.setClientRating(bundle.getString("clientRating"));
+            advert.setStatus(bundle.getString("status"));
+            advert.setFirstPhotoUrl(bundle.getString("firstPhotoUrl"));
+            advert.setCantApplications(bundle.getString("cantApplications"));
+            advert.setClientName(bundle.getString("clientName"));
+            advert.setCarInfo(bundle.getString("carInfo"));
+            advert.setPostulationStatus(bundle.getString("postulationStatus"));
+        }
         return advert;
     }
 
@@ -222,10 +258,13 @@ public class Advert {
         bundle.putString("creationDate",this.getCreationDate());
         bundle.putString("endDate",this.getEndDate());
         bundle.putString("comments",this.getComments());
-        bundle.putString("ranking",this.getRanking());
+        bundle.putString("clientRating",this.getClientRating());
         bundle.putString("status",this.getStatus());
         bundle.putString("firstPhotoUrl",this.getFirstPhotoUrl());
         bundle.putString("cantApplications",this.getCantApplications());
+        bundle.putString("clientName",this.getClientName());
+        bundle.putString("carInfo",this.getCarInfo());
+        bundle.putString("postulationStatus",this.getPostulationStatus());
         return bundle;
     }
 }

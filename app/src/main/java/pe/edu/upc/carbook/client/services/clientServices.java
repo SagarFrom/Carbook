@@ -1,6 +1,6 @@
 package pe.edu.upc.carbook.client.services;
 
-import pe.edu.upc.carbook.share.Constants.Constants;
+import pe.edu.upc.carbook.share.constants.Constants;
 
 /**
  * Created by hypnotic on 4/11/2016.
