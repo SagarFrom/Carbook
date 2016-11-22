@@ -75,6 +75,9 @@
     <string name="about_app">Aqui podra añadir una imagen de su local. \n\n</string> 
     <string name="capture_video_switch_text">Seleccionar una imagen  </string>
 
+    <!-- For Create Advert-->
+    <string name="publicar">Add</string>
+
 </resources>
 
 

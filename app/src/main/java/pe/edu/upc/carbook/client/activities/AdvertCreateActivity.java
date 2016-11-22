@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -76,6 +79,7 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
         setDateTimeField();
         updateDataCars();
 
+        descriptionEditText = (EditText) findViewById(R.id.descriptionEditText);
         carInfoSpinner = (Spinner) findViewById(R.id.carInfoSpinner);
 
         carInfoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -153,9 +157,33 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.client_menu_public, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_nuevo:
+                crearAnuncio();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         updateDataCars();
+    }
+
+    private void crearAnuncio(){
+
     }
 
     private void updateDataCars(){
