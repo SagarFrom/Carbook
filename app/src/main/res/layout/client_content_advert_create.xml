@@ -84,7 +84,7 @@
                 android:layout_height="50dp"
                 android:theme="@style/loginButton"
                 android:id="@+id/saveAdvertButton"
-                android:text="Guardar Anuncion"
+                android:text="Guardar Anuncio"
                 />
         </LinearLayout>
     </android.support.v7.widget.CardView>
