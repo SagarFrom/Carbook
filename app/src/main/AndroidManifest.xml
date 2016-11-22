@@ -4,6 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> 
+    <uses-permission android:name="android.permission.CAMERA"/> 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/> 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/> 
+    <uses-feature android:name="android.hardware.camera2"/>
 
     <application
         android:name=".CarbookApp"
@@ -104,6 +111,12 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pe.edu.upc.carbook.share.activities.NavigationActivity" />
+        </activity>
+    
+        <activity
+            android:name=".share.activities.CameraActivity"
+            android:label="@string/title_activity_advert_detail"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

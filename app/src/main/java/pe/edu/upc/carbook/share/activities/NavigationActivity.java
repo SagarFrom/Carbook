@@ -41,6 +41,7 @@ public class NavigationActivity extends BaseActivity {
         spm = new SharedPreferencesManager(NavigationActivity.this);
         userSession = spm.getUserOnPreferences();
 
+
         invalidateOptionsMenu();
 
         Context context = getApplicationContext();

@@ -72,6 +72,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onClick(View view){
                 ChangeScreem(RegisterActivity.class,true);
+
             }
         });
     }
