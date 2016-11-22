@@ -141,48 +141,68 @@ public class LocalManageActivity extends AppCompatActivity {
                 }
                 if(hasRequired){
 
-                    HashMap<String, String> dicMap = new HashMap<String, String>();
-                    dicMap.put("Name", "Local1");
-                    dicMap.put("ImageUrl", editor.getString("urllocal","blank").toString());
+                    //HashMap<String, String> dicMap = new HashMap<String, String>();
+                    //dicMap.put("Name", "Local1");
+                    //dicMap.put("ImageUrl", editor.getString("urllocal","blank").toString());
 
 
-                        JSONObject gallery1 = new JSONObject();
+                    JSONObject gallery1 = new JSONObject();
                     try {
                         //gallery1.put("LocalId",local.getLocalId().toString());
                         gallery1.put("Name", "Local1");
-                        //gallery1.put("ImageUrl", editor.getString("urllocal","blank").toString());
-                        gallery1.put("ImageUrl","url");
+                        gallery1.put("ImageUrl", editor.getString("urllocal","blank").toString());
+                        //gallery1.put("ImageUrl","url");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    JSONArray galleryArray = new JSONArray();
 
+
+                    JSONArray galleryArray = new JSONArray();
                     galleryArray.put(gallery1);
+
+
+                    JSONObject restoObj = new JSONObject();
+                    try {
+
+                        restoObj.put("LocalId",local.getLocalId().toString());
+                        restoObj.put("ProviderId",userSession.getUserId().toString());
+                        restoObj.put("Name",nameEditText.getText().toString());
+                        restoObj.put("Address",addressEditView.getText().toString());
+                        restoObj.put("Capacity",capacityEditView.getText().toString());
+                        restoObj.put("Latitude","7.546464646400000");
+                        restoObj.put("Longitude","8.879846516110000");
+                        restoObj.put("Status","ACT");
+                        restoObj.put("Gallery",galleryArray);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                     JSONObject jsongOBJallery = new JSONObject();
                     try {
-                        jsongOBJallery.put("Gallery",dicMap);
+
+                        jsongOBJallery.put("Gallery",galleryArray);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
 
-                    Toast to = Toast.makeText(LocalManageActivity.this,galleryArray.toString(),Toast.LENGTH_SHORT);
+                    Toast to = Toast.makeText(LocalManageActivity.this,restoObj.toString(),Toast.LENGTH_SHORT);
                     to.show();
 
                     AndroidNetworking.post(ProviderServices.LOCALS_MANAGE)
-                            .addBodyParameter("LocalId",local.getLocalId().toString())
-                            .addBodyParameter("ProviderId",userSession.getUserId().toString())
-                            .addBodyParameter("Name",nameEditText.getText().toString())
-                            .addBodyParameter("Address",addressEditView.getText().toString())
-                            .addBodyParameter("Capacity",capacityEditView.getText().toString())
-                            .addBodyParameter("Latitude","7.546464646400000")
-                            .addBodyParameter("Longitude","8.879846516110000")
-                            .addBodyParameter("Status","ACT")
+                            //.addBodyParameter("LocalId",local.getLocalId().toString())
+                            //.addBodyParameter("ProviderId",userSession.getUserId().toString())
+                            //.addBodyParameter("Name",nameEditText.getText().toString())
+                            //.addBodyParameter("Address",addressEditView.getText().toString())
+                            //.addBodyParameter("Capacity",capacityEditView.getText().toString())
+                            //.addBodyParameter("Latitude","7.546464646400000")
+                            //.addBodyParameter("Longitude","8.879846516110000")
+                            //.addBodyParameter("Status","ACT")
 
-                            .addJSONObjectBody(jsongOBJallery)
+                            .addJSONObjectBody(restoObj)
 
                             //.addBodyParameter("FirstPhotoUrl",editor.getString("urllocal","blank").toString())
 

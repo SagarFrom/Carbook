@@ -112,7 +112,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pe.edu.upc.carbook.share.activities.NavigationActivity" />
         </activity>
-    
+
         <activity
             android:name=".share.activities.CameraActivity"
             android:label="@string/title_activity_advert_detail"

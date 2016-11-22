@@ -1,0 +1,104 @@
+{
+  "project_info": {
+    "project_number": "56428246707",
+    "firebase_url": "https://carbookdb.firebaseio.com",
+    "project_id": "carbookdb",
+    "storage_bucket": "carbookdb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56428246707:android:dccece0417c9d53f",
+        "android_client_info": {
+          "package_name": "pe.edu.upc.firebase_camera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56428246707-j140j7e3vtkhvebsp5c57im1vkf8b1nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFppbyWo043RQ0M6MUnP-OpdGhu54-2ek"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56428246707:android:52ba776335d3d9d2",
+        "android_client_info": {
+          "package_name": "e.edu.upc.camerify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56428246707-j140j7e3vtkhvebsp5c57im1vkf8b1nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFppbyWo043RQ0M6MUnP-OpdGhu54-2ek"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56428246707:android:7336ffac06f053cc",
+        "android_client_info": {
+          "package_name": "pe.edu.upc.carbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56428246707-j140j7e3vtkhvebsp5c57im1vkf8b1nd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFppbyWo043RQ0M6MUnP-OpdGhu54-2ek"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
