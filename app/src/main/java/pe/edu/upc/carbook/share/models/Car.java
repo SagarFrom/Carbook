@@ -1,5 +1,12 @@
 package pe.edu.upc.carbook.share.models;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by usuario on 21/11/2016.
  */
@@ -76,6 +83,34 @@ public class Car {
         return this.brand + " " + this.model;
     }
 
-    
+    public static Car buildFromJSONObject(JSONObject jsonCar){
+        Car car = new Car();
+        try{
+            car.setCarId(jsonCar.getString("CarId"));
+            car.setClientId(jsonCar.getString("ClientId"));
+            car.setBrand(jsonCar.getString("Brand"));
+            car.setModel(jsonCar.getString("Model"));
+            car.setStatus(jsonCar.getString("Status"));
+            car.setPlateNumber(jsonCar.getString("PlateNumber"));
+            car.setFirstPhotoUrl(jsonCar.getString("FirstPhotoUrl"));
+            return car;
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        return car;
+    }
+
+    public static List<Car> buildFromJSONArray(JSONArray jsonResult){
+        List<Car> cars = new ArrayList<>();
+        int carsCount = jsonResult.length();
+        for(int i = 0; i < carsCount; i++){
+            try {
+                cars.add(buildFromJSONObject(jsonResult.getJSONObject(i)));
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return cars;
+    }
 
 }
