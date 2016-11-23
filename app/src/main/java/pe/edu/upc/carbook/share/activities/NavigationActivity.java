@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.client.fragments.AdvertsFragment;
+import pe.edu.upc.carbook.client.fragments.ClientFragment;
 import pe.edu.upc.carbook.provider.fragments.AvailableAdvertFragment;
 import pe.edu.upc.carbook.provider.fragments.PostulationFragment;
 import pe.edu.upc.carbook.provider.fragments.ProfileFragment;
@@ -108,7 +109,7 @@ public class NavigationActivity extends BaseActivity {
                         genericFragment = new ProfileFragment();
                         break;
                     case "CLI":
-                        //POR HACER: INICIALIZACION DEL PERFIL DE CLIENTE
+                        genericFragment = new ClientFragment();
                         break;
                 }
                 break;

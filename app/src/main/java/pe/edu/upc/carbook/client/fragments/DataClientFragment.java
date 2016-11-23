@@ -30,7 +30,7 @@ import pe.edu.upc.carbook.share.models.User;
 
 public class DataClientFragment extends Fragment {
     TextInputEditText clientNameEditText,clientFatherNameEditText,clientMotherNameEditText, emailEditText
-            ,documentNumberEditText;
+            ,documentNumberEditText,birthdateTextInputEditText;
     SharedPreferencesManager spm;
     Button saveDataClientButton;
     Context fragmentContext;
@@ -39,6 +39,7 @@ public class DataClientFragment extends Fragment {
     public DataClientFragment(){
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.client_frangment_data,container, false);
@@ -49,11 +50,14 @@ public class DataClientFragment extends Fragment {
         clientMotherNameEditText = (TextInputEditText)view.findViewById(R.id.clientMotherLastNameEditText);
         emailEditText = (TextInputEditText)view.findViewById(R.id.emailEditText);
         documentNumberEditText = (TextInputEditText)view.findViewById(R.id.documentNumberEditText);
+        birthdateTextInputEditText = (TextInputEditText)view.findViewById(R.id.birthdateTextInputEditText);
         saveDataClientButton = (Button)view.findViewById(R.id.saveDataClientButton);
+
+        clientFatherNameEditText.setText(userSession.getLastName());
+        clientMotherNameEditText.setText(userSession.getLastName());
         clientNameEditText.setText(userSession.getName());
         emailEditText.setText(userSession.getEmail());
-        documentNumberEditText.setText(userSession.getDocumentNumber());
-
+        documentNumberEditText.setText(userSession.getDNI());
         saveDataClientButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +65,9 @@ public class DataClientFragment extends Fragment {
                         .addBodyParameter("Nombre",clientNameEditText.getText().toString())
                         .addBodyParameter("ApellidoPaterno",clientFatherNameEditText.getText().toString())
                         .addBodyParameter("ApellidoMaterno",clientFatherNameEditText.getText().toString())
-                        .addBodyParameter("NumeroDocumento",documentNumberEditText.getText().toString())
+                        .addBodyParameter("DNI",documentNumberEditText.getText().toString())
                         .addBodyParameter("Rol","CLI")
+                        .addBodyParameter("FechaNacimiento","18/05/1994")
                         .addBodyParameter("UsuarioId",userSession.getUserId().toString())
                         .setTag("Test")
                         .setPriority(Priority.MEDIUM)

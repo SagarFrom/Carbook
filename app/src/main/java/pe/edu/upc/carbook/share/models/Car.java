@@ -1,5 +1,7 @@
 package pe.edu.upc.carbook.share.models;
 
+import android.os.Bundle;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -111,6 +113,34 @@ public class Car {
             }
         }
         return cars;
+    }
+
+    public static Car buildFromBundle(Bundle bundle) {
+        Car car = new Car();
+        if(bundle != null) {
+            car.setBrand(bundle.getString("Brand"));
+            car.setCarId(bundle.getString("CarId"));
+            car.setClientId(bundle.getString("ClientId"));
+            car.setBrand(bundle.getString("Brand"));
+            car.setModel(bundle.getString("Model"));
+            car.setStatus(bundle.getString("Status"));
+            car.setPlateNumber(bundle.getString("PlateNumber"));
+            car.setFirstPhotoUrl(bundle.getString("FirstPhotoUrl"));
+        }
+        return car;
+    }
+
+    public Bundle toBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString("CarId",this.getCarId());
+        bundle.putString("Brand", this.getCarFullName());
+        bundle.putString(("ClientId"),this.getClientId());
+        bundle.putString("Model", this.getModel());
+        bundle.putString("FirstPhotoUrl", this.getFirstPhotoUrl());
+        bundle.putString("Status", this.getStatus());
+        bundle.putString("PlateNumber", this.getPlateNumber());
+        return bundle;
+
     }
 
 }
