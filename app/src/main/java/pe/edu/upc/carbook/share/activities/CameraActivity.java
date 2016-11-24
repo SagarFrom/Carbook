@@ -209,13 +209,34 @@ public class CameraActivity extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                         //mProgress.dismiss();
-                        Log.d(TAG,"entro");
+                        //Log.d(TAG,"entro");
 
-                        Uri downloadUri = taskSnapshot.getDownloadUrl();
-                        Log.d("name:",downloadUri.toString());
+                       // Uri downloadUri = taskSnapshot.getDownloadUrl();
+                        //Log.d("name:",downloadUri.toString());
 
-                        Toast.makeText(CameraActivity.this, downloadUri.toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(CameraActivity.this, downloadUri.toString(), Toast.LENGTH_SHORT).show();
 
+                        ima = (ImageView) findViewById(R.id.imageViewlocal);
+
+
+
+                        mStorage.child("Photos/Locals/" + namephoto).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                // Got the download URL for 'users/me/profile.png'
+
+                                Toast.makeText(CameraActivity.this, uri.toString() , Toast.LENGTH_LONG).show();
+                                Picasso.with(CameraActivity.this).load(uri.toString()).fit().centerCrop().into(ima);
+
+                                editor.putString("urllocal",uri.toString());
+                                editor.commit();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
 
                         /*        .into(ima);
 
