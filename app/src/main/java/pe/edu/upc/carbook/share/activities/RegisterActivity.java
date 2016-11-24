@@ -141,7 +141,6 @@ public class RegisterActivity extends BaseActivity {
                 .addBodyParameter("NumeroDocumento",textEditRuc.getText().toString())
                 .addBodyParameter("Rol",spinnerRol.getSelectedItem().toString() == "Proveedor" ? "PRO" : "CLI")
                 .addBodyParameter("Estado","ACT")
-
                 .setTag("Test")
                 .setPriority(Priority.MEDIUM)
                 .build()
