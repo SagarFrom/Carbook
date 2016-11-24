@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.client.services.clientServices;
 import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
+import pe.edu.upc.carbook.share.models.Advert;
 import pe.edu.upc.carbook.share.models.Car;
 import pe.edu.upc.carbook.share.models.User;
 
@@ -56,6 +57,7 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
 
     private List<Car> carsOfClient = new ArrayList<>();
     private List<String> nameFullCars;
+    private Advert newAdverd = new Advert();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy",Locale.US);
+        dateFormatter = new SimpleDateFormat("dd/MM/yyyy",Locale.US);
         spm = new SharedPreferencesManager(context);
         userSession = spm.getUserOnPreferences();
         findViewsById();
@@ -87,6 +89,7 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // On selecting a spinner item
                 String item = parent.getItemAtPosition(position).toString();
+                newAdverd.setCarId(carsOfClient.get(position).getCarId());
 
                 // Showing selected spinner item
                 Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
@@ -142,6 +145,7 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
                 newDate.set(year, month, dayOfMonth);
                 toDateEditText.setText(dateFormatter.format(newDate.getTime()));
                 //Aca cambiar la data del Año
+                newAdverd.setEndDate(dateFormatter.format(newDate.getTime()));
                 Toast toast = Toast.makeText(context,"Fecha Fin: "+ newDate.getTime().toString() ,Toast.LENGTH_SHORT);
                 toast.show();
             }
@@ -183,6 +187,57 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void crearAnuncio(){
+        newAdverd.setDescription(descriptionEditText.getText().toString());
+        newAdverd.setClientId(userSession.getUserId().toString());
+        newAdverd.setCreationDate("24/11/2016");
+        newAdverd.setStatus("ACT");
+        newAdverd.setSelectionDate("");
+        newAdverd.setCantApplications("0");
+        newAdverd.setPostulationStatus("");
+
+        AndroidNetworking.post(clientServices.ADVERTS_POST)
+                .addBodyParameter("ClientId",newAdverd.getClientId())
+                .addBodyParameter("CarId",newAdverd.getCarId())
+                .addBodyParameter("Description",newAdverd.getDescription())
+                .addBodyParameter("CreationDate",newAdverd.getCreationDate())
+                .addBodyParameter("EndDate",newAdverd.getEndDate())
+                .addBodyParameter("Status",newAdverd.getStatus())
+                .addBodyParameter("NPostulations",newAdverd.getCantApplications())
+                .setTag(TAG)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+
+                            if(response.getString("Code").equalsIgnoreCase("200")){
+
+                                Toast toast = Toast.makeText(AdvertCreateActivity.this,response.getString("Message"),Toast.LENGTH_SHORT);
+                                toast.show();
+                                AdvertCreateActivity.this.finish();
+                            }
+                            else
+                            {
+                                Toast toast = Toast.makeText(AdvertCreateActivity.this,response.getString("Code") + response.getString("Message"),Toast.LENGTH_SHORT);
+                                toast.show();
+                                Log.d(TAG, "Response Error: " + response.getString("Message"));
+                                Log.d(TAG, "Response Error: " + response.getString("ExceptionMessage"));
+                                AdvertCreateActivity.this.finish();
+                            }
+
+
+                        }catch(JSONException e){
+                            Log.d(TAG,"Error: " + e.getLocalizedMessage());
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.d(TAG, "onError " + anError.getErrorBody());
+                    }
+                });
 
     }
 
