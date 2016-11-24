@@ -68,7 +68,7 @@
                     android:layout_weight="3"
                     android:hint="Comentario"
                     android:layout_height="wrap_content"
-                    android:id="@+id/quotationEditView"
+                    android:id="@+id/descriptionEditText"
                     android:textColor="@color/cardview_light_background"
                     android:textColorHint="@color/cardview_light_background"
                     android:inputType="text"/>
