@@ -50,8 +50,8 @@ public class ClientFragment extends Fragment {
     private void populateViewPager(ViewPager viewPager) {
         ClientFragment.SectionsAdapter adapter = new ClientFragment.SectionsAdapter(getFragmentManager());
         adapter.addFragment(new DataClientFragment(), getString(R.string.tab_title_personal_info));
-        adapter.addFragment(new LocalFragment(), getString(R.string.tab_title_locals));
-        adapter.addFragment(new ServiceTabFragment(), getString(R.string.tab_title_services));
+        //adapter.addFragment(new CarFragment(), "Carros");
+        //adapter.addFragment(new ServiceTabFragment(), getString(R.string.tab_title_services));
         viewPager.setAdapter(adapter);
     }
     @Override
