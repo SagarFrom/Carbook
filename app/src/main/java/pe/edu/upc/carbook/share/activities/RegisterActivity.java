@@ -1,5 +1,6 @@
 package pe.edu.upc.carbook.share.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -153,8 +154,11 @@ public class RegisterActivity extends BaseActivity {
                             Integer resultCode = response.getInt("Code");
                             if(resultCode == 200){
                                 Toast toast = Toast.makeText(getApplicationContext(),"Success: " +
-                                        response.getString("Result"),Toast.LENGTH_SHORT);
+                                        response.getString("Result"),Toast.LENGTH_LONG);
                                 toast.show();
+
+                                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                                startActivity(intent);
                             }
                             else
                             {
@@ -177,5 +181,11 @@ public class RegisterActivity extends BaseActivity {
                     }
                 });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+        startActivity(intent);
     }
 }
