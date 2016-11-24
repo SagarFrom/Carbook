@@ -47,7 +47,7 @@ public class CameraActivity extends AppCompatActivity {
 
     public SharedPreferences.Editor editor;
     // Log.d TAG
-    private static final String TAG = "Camerify";
+    private static final String TAG = "Carbook";
     // File Uri
     private Uri fileUri;
     // Media Type Constants

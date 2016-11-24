@@ -1,11 +1,19 @@
 package pe.edu.upc.carbook.client.activities;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -18,28 +26,47 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.text.SimpleDateFormat;
 import pe.edu.upc.carbook.R;
 import pe.edu.upc.carbook.client.services.clientServices;
+import pe.edu.upc.carbook.share.activities.CameraActivity;
 import pe.edu.upc.carbook.share.helpers.SharedPreferencesManager;
 import pe.edu.upc.carbook.share.models.Advert;
 import pe.edu.upc.carbook.share.models.Car;
 import pe.edu.upc.carbook.share.models.User;
+
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+
+/**
+ * Created by Richard on 18/11/16.
+ */
+
 
 public class AdvertCreateActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -58,6 +85,23 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
     private List<Car> carsOfClient = new ArrayList<>();
     private List<String> nameFullCars;
     private Advert newAdverd = new Advert();
+
+    //Para la Toma de Foto
+    private Uri fileUri;
+    private static final int MEDIA_TYPE_IMAGE = 1;
+    private static final int MEDIA_TYPE_VIDEO = 2;
+    private static final int MEDIA_TYPE_IMAGE_PICK = 3;
+    private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+    private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 200;
+    private static final int PICK_IMAGE_ACTIVITY_REQUEST_CODE = 300;
+    private Uri lastOutputMediaFileUri = null;
+    private Switch photoCaptureSwitch;
+    private static final int PERMISSION_REQUEST_CAMERA = 100;
+    private boolean cameraAvailable = false;
+    private static String namephoto;
+    private ImageView advertImageView;
+    private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,15 +145,182 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        //PARA LA FOTO
+        photoCaptureSwitch = (Switch) findViewById(R.id.photoCaptureSwitch);
+        validatePermissions();
+        final StorageReference gsReference;
+        gsReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://carbookdb.appspot.com/");
+        advertImageView = (ImageView) findViewById(R.id.advertImageView);
+
+        gsReference.child("Photos/Locals/IMG_20161119_173212.jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onSuccess(Uri uri) {
+                Toast.makeText(AdvertCreateActivity.this, uri.toString() , Toast.LENGTH_LONG).show();
+                Picasso.with(AdvertCreateActivity.this).load(uri.toString()).fit().centerCrop().into(advertImageView);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
             }
         });
 
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(onClickListenerForFloatingActionButton());
+    }
+
+    private View.OnClickListener onClickListenerForFloatingActionButton() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(photoCaptureSwitch.isChecked()){
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent,PICK_IMAGE_ACTIVITY_REQUEST_CODE);
+                } else{
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+                    startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                }
+                lastOutputMediaFileUri = fileUri;
+            }
+        };
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
+            if(resultCode == RESULT_OK) {
+                Log.d(TAG, "ResultCode: RESULT_OK");
+                String fileName = data != null ? data.getData().getPath() : lastOutputMediaFileUri.getPath();
+                final StorageReference mStorage;
+                mStorage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://carbookdb.appspot.com/");
+                StorageReference filepath = mStorage.child("Photos/Locals").child(namephoto);
+                Toast.makeText(this, "ruta: " + fileUri.toString(), Toast.LENGTH_LONG).show();
+                filepath.putFile(fileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Log.d(TAG,"entro");
+                        Uri downloadUri = taskSnapshot.getDownloadUrl();
+                        Log.d("name:",downloadUri.toString());
+                        Toast.makeText(AdvertCreateActivity.this, downloadUri.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else if(resultCode == RESULT_CANCELED) {
+                Log.d(TAG, "ResultCode: RESULT_CANCELED");
+            } else {
+                Log.d(TAG, "ResultCode: "+Integer.toString(resultCode));
+            }
+        }
+        if(requestCode == PICK_IMAGE_ACTIVITY_REQUEST_CODE){
+            if(resultCode == RESULT_OK){
+                final String fileName = data != null ? data.getData().getPath() : lastOutputMediaFileUri.getPath();
+                final StorageReference mStorage;
+                mStorage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://carbookdb.appspot.com/");
+                StorageReference filepath = mStorage.child("Photos/Locals").child(namephoto);
+                String prefix = "Content:";
+                Uri prueba = data.getData();
+                filepath.putFile(prueba).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        advertImageView = (ImageView) findViewById(R.id.advertImageView);
+                        mStorage.child("Photos/Locals/" + namephoto).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Toast.makeText(AdvertCreateActivity.this, uri.toString() , Toast.LENGTH_LONG).show();
+                                Picasso.with(AdvertCreateActivity.this).load(uri.toString()).fit().centerCrop().into(advertImageView);
+                                newAdverd.setFirstPhotoUrl(uri.toString());
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
+                    }
+                });
+                Toast.makeText(this, "Image picked to: " + fileUri.toString(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private Uri getOutputMediaFileUri(int type) {
+        return Uri.fromFile(getOutputMediaFile(type));
+    }
+
+    private static File getOutputMediaFile(int type) {
+        File mediaStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        if(!mediaStorageDir.exists()) {
+            if(!mediaStorageDir.mkdirs()) {
+                Log.d(TAG, "Failed to create directory");
+                return null;
+            }
+        }
+        else {
+            Log.d(TAG, "Directory found");
+        }
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File mediaFile;
+        if(type == MEDIA_TYPE_IMAGE) {
+            namephoto = "IMG_" + timeStamp + ".jpg";
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator + namephoto);
+        }
+        else if (type == MEDIA_TYPE_VIDEO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator + "VID_" + timeStamp + ".mp4");
+        }
+        else {
+            if(type == MEDIA_TYPE_IMAGE_PICK){
+                namephoto = "IMG_" + timeStamp + ".jpg";
+                mediaFile = new File( mediaStorageDir.getPath() + File.separator + namephoto);
+            }
+            else {
+                return null;
+            }
+        }
+        try {
+            Log.d(TAG, mediaFile.getCanonicalPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mediaFile;
+    }
+
+    private void validatePermissions(){
+        if(permissionsGranted()) {
+            cameraAvailable = true;
+            return;
+        }
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
+    }
+
+    private boolean permissionsGranted() {
+        boolean grantedCameraPermission = (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PERMISSION_GRANTED);
+        boolean grantedStoragePermission = (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PERMISSION_GRANTED);
+        Log.d(TAG, "Permission for CAMERA: " + String.valueOf(grantedCameraPermission));
+        Log.d(TAG, "Permission for STORAGE: " + String.valueOf(grantedStoragePermission));
+        return (grantedCameraPermission && grantedStoragePermission);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CAMERA: {
+                cameraAvailable = ((grantResults.length > 0 && grantResults[0] == PERMISSION_GRANTED) &&
+                        (grantResults.length > 0 && grantResults[1] == PERMISSION_GRANTED));
+            }
+
+        }
+        updatePermissionsDependentFeatures();
+    }
+
+    private void updatePermissionsDependentFeatures() {
+        fab.setEnabled(cameraAvailable);
+        photoCaptureSwitch.setEnabled(cameraAvailable);
     }
 
     private void inicializarAdapter(){
@@ -272,5 +483,7 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
                 });
 
     }
+
+
 
 }
