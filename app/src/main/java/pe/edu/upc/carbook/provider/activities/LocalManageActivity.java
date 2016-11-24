@@ -23,6 +23,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +54,7 @@ public class LocalManageActivity extends AppCompatActivity {
     boolean nobundleatributes = true;
 
     public SharedPreferences editor;
+    public static int UPDATE_A_ACTIVITY = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,12 @@ public class LocalManageActivity extends AppCompatActivity {
 
         buttonImageLocalManage = (ImageButton)findViewById(R.id.imageButtonLocalManage);
 
+        //if(editor.getString("urllocal","blank").toString() != "")
+        //    Picasso.with(LocalManageActivity.this).load(editor.getString("urllocal","blank").toString()).fit().centerCrop().into(buttonImageLocalManage);
+
+
+
+
         buttonImageLocalManage.setOnClickListener(new View.OnClickListener() {
 
 
@@ -92,12 +100,20 @@ public class LocalManageActivity extends AppCompatActivity {
 
                 nobundleatributes = false;
 
+
+
+
                 Intent intent = new Intent(LocalManageActivity.this,CameraActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,UPDATE_A_ACTIVITY);
+
+
 
 
                 Toast toast = Toast.makeText(LocalManageActivity.this,"clickonbuttonima",Toast.LENGTH_SHORT);
                 toast.show();
+
+                if(editor.getString("urllocal","blank").toString() != "")
+                    Picasso.with(LocalManageActivity.this).load(editor.getString("urllocal","blank").toString()).fit().centerCrop().into(buttonImageLocalManage);
             }
         });
 
@@ -157,6 +173,10 @@ public class LocalManageActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
+                    SharedPreferences.Editor editorBorrar;
+                    editorBorrar = getSharedPreferences("local", MODE_PRIVATE).edit();
+                    editorBorrar.putString("urllocal","");
+                    editorBorrar.commit();
 
 
                     JSONArray galleryArray = new JSONArray();
@@ -240,6 +260,27 @@ public class LocalManageActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //setContentView(R.layout.provider_activity_local_manage);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    buttonImageLocalManage = (ImageButton)findViewById(R.id.imageButtonLocalManage);
+
+
+                    if(editor.getString("urllocal","blank").toString() != "")
+                        Picasso.with(LocalManageActivity.this).load(editor.getString("urllocal","blank").toString()).fit().centerCrop().into(buttonImageLocalManage);
+                }
+                break;
+        }
     }
 
 }

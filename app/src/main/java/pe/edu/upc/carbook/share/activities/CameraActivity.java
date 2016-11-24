@@ -446,5 +446,11 @@ public class CameraActivity extends AppCompatActivity {
         videoCaptureSwitch.setEnabled(cameraAvailable);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setContentView(R.layout.activity_camera);
 
+        setResult(RESULT_OK);
+    }
 }
