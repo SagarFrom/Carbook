@@ -8,9 +8,4 @@
         android:title="@string/publicar"
         android:enabled="true"
         android:visible="true" />
-    <item android:id="@+id/action_settings"
-        android:title="Settings"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:enabled="false" />
 </menu>

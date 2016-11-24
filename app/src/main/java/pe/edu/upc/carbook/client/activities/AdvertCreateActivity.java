@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +43,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -204,10 +206,20 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
                 filepath.putFile(fileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.d(TAG,"entro");
-                        Uri downloadUri = taskSnapshot.getDownloadUrl();
-                        Log.d("name:",downloadUri.toString());
-                        Toast.makeText(AdvertCreateActivity.this, downloadUri.toString(), Toast.LENGTH_SHORT).show();
+                        advertImageView = (ImageView) findViewById(R.id.advertImageView);
+                        mStorage.child("Photos/Locals/" + namephoto).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Toast.makeText(AdvertCreateActivity.this, uri.toString() , Toast.LENGTH_LONG).show();
+                                Picasso.with(AdvertCreateActivity.this).load(uri.toString()).fit().centerCrop().into(advertImageView);
+                                newAdverd.setFirstPhotoUrl(uri.toString());
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
                     }
                 });
             } else if(resultCode == RESULT_CANCELED) {
@@ -222,7 +234,6 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
                 final StorageReference mStorage;
                 mStorage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://carbookdb.appspot.com/");
                 StorageReference filepath = mStorage.child("Photos/Locals").child(namephoto);
-                String prefix = "Content:";
                 Uri prueba = data.getData();
                 filepath.putFile(prueba).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -384,7 +395,17 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_nuevo:
-                crearAnuncio();
+                boolean hasRequired = false;
+                if(TextUtils.isEmpty(toDateEditText.getText().toString())){
+                    toDateEditText.setError("Campo Requerido");
+                    hasRequired = true;
+                }
+                if(TextUtils.isEmpty(descriptionEditText.getText().toString())){
+                    toDateEditText.setError("Campo Requerido");
+                    hasRequired = true;
+                }
+                if(!hasRequired)
+                    crearAnuncio();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -406,14 +427,33 @@ public class AdvertCreateActivity extends AppCompatActivity implements View.OnCl
         newAdverd.setCantApplications("0");
         newAdverd.setPostulationStatus("");
 
+        JSONObject photoGallery = new JSONObject();
+        try{
+            photoGallery.put("Name","Anuncio");
+            photoGallery.put("ImageUrl",newAdverd.getFirstPhotoUrl());
+            photoGallery.put("Status","ACT");
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JSONArray galleryArray = new JSONArray();
+        galleryArray.put(photoGallery);
+
+        JSONObject restObj = new JSONObject();
+        try{
+            restObj.put("ClientId",newAdverd.getClientId());
+            restObj.put("CarId",newAdverd.getCarId());
+            restObj.put("Description",newAdverd.getDescription());
+            restObj.put("CreationDate",newAdverd.getCreationDate());
+            restObj.put("EndDate",newAdverd.getEndDate());
+            restObj.put("Status",newAdverd.getStatus());
+            restObj.put("NPostulations",newAdverd.getCantApplications());
+            restObj.put("Gallery",galleryArray);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         AndroidNetworking.post(clientServices.ADVERTS_POST)
-                .addBodyParameter("ClientId",newAdverd.getClientId())
-                .addBodyParameter("CarId",newAdverd.getCarId())
-                .addBodyParameter("Description",newAdverd.getDescription())
-                .addBodyParameter("CreationDate",newAdverd.getCreationDate())
-                .addBodyParameter("EndDate",newAdverd.getEndDate())
-                .addBodyParameter("Status",newAdverd.getStatus())
-                .addBodyParameter("NPostulations",newAdverd.getCantApplications())
+                .addJSONObjectBody(restObj)
                 .setTag(TAG)
                 .setPriority(Priority.MEDIUM)
                 .build()
